@@ -9,8 +9,6 @@ Contribute 하려는 Repo가 해당 Repo가 맞는지 확인을 꼭 해주시기
 
 그리고 개인 repo를 로컬 저장소로 clone 해줍니다.
 
-그 후 upstream branch로 BE Repo를 추가해줍니다.
-
 ## 2. Make new branch
 develop 브랜치에서, 개별 개발용 branch를 생성합니다.<br/>
 branch명에 대한 규칙은 별도로 없으나, `(커밋 타입)/(개발 내용)`의 형태를 따르는 것을 추천드립니다.
