@@ -1,4 +1,4 @@
-package org.rubatophil.www.api.domain;
+package org.rubatophil.www.api.domain.type;
 
 import com.sun.istack.NotNull;
 import lombok.Builder;

@@ -3,7 +3,7 @@ package org.rubatophil.www.api.domain.member;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import org.rubatophil.www.api.domain.Address;
+import org.rubatophil.www.api.domain.type.Address;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

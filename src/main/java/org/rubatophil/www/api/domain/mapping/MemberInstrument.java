@@ -1,8 +1,9 @@
-package org.rubatophil.www.api.domain;
+package org.rubatophil.www.api.domain.mapping;
 
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.rubatophil.www.api.domain.type.Instrument;
 import org.rubatophil.www.api.domain.member.Member;
 
 import javax.persistence.*;
