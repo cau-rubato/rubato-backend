@@ -21,6 +21,7 @@ public class Applicant extends Member {
     @NotNull
     private String studentId;
 
+    @Enumerated(EnumType.STRING)
     @Embedded
     private Experience experience;
 }
