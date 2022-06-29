@@ -36,6 +36,7 @@ develop: 다음 출시 버전을 개발하는 브랜치
 feature: 기능을 개발하는 브랜치
 * feature/{기능}
 * issue가 있는 경우, [feature/{기능}](#{이슈번호}) message
+ops: 프로젝트 운영에 쓰이는 브랜치
 chore: 문서 등 기타 단순 수정하는 브랜치
 * [chore/{한 일}]
 release: 이번 출시 버전을 준비하는 브랜치
