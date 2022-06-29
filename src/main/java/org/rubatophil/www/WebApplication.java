@@ -1,4 +1,4 @@
-package org.rubatophil.web;
+package org.rubatophil.www;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
