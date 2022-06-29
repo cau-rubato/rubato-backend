@@ -4,7 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.rubatophil.www.api.domain.Department;
-import org.rubatophil.www.api.domain.MemberInstrument;
+import org.rubatophil.www.api.domain.mapping.MemberInstrument;
 
 import javax.persistence.*;
 import java.util.List;
