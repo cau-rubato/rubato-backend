@@ -29,7 +29,6 @@ public class Department {
     private String college;
     @NotNull
     private String school;
-    @NotNull
     private String department;
 
     @LastModifiedDate
