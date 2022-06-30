@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 
 @WebMvcTest(FAQController.class)
 @Import(HttpEncodingAutoConfiguration.class)
-class DonateControllerTest {
+class MemberControllerTest {
 
     MockMvc mockMvc;
 
@@ -31,11 +31,8 @@ class DonateControllerTest {
                 .build();
     }
 
-    @Test
-    void donateInfo() {
-    }
 
     @Test
-    void donate() {
+    void searchMemberList() {
     }
 }
