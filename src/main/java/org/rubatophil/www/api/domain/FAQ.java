@@ -3,34 +3,25 @@ package org.rubatophil.www.api.domain;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import org.rubatophil.www.api.domain.member.Member;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name = "DONATE")
+@Table(name = "FAQ")
 @Getter @Setter
-public class Donate {
+public class FAQ {
 
     @Id @GeneratedValue
-    @Column(name = "donate_id")
+    @Column(name = "faq_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
     @NotNull
-    private Member member;
-
-    @OneToMany(mappedBy = "donate", cascade = CascadeType.ALL)
-    @JoinColumn(name = "budget_id")
+    private String question;
     @NotNull
-    private List<Budget> budgetPurposes;
-
-    private String message;
+    private String answer;
 
     @LastModifiedDate
     @NotNull
