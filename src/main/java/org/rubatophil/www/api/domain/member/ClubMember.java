@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.rubatophil.www.api.domain.Department;
+import org.rubatophil.www.api.domain.Manager;
 import org.rubatophil.www.api.domain.mapping.MemberInstrument;
 
 import javax.persistence.*;
@@ -18,6 +19,9 @@ public class ClubMember extends Member {
     @JoinColumn(name = "department_id")
     @NotNull
     private Department department;
+
+    @OneToOne(mappedBy = "clubMember", cascade = CascadeType.ALL)
+    private Manager manager;
 
     @NotNull
     private String studentId;
