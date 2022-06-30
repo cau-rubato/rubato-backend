@@ -19,7 +19,7 @@ public class ConcertPamphlet {
 
     @Id @GeneratedValue
     @Column(name = "concert_pamphlet_id")
-    private long id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "concert_id")
