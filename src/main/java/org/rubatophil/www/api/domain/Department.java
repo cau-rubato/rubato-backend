@@ -19,7 +19,7 @@ public class Department {
 
     @Id @GeneratedValue
     @Column(name = "department_id")
-    private long id;
+    private Long id;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     @NotNull
