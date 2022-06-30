@@ -1,4 +1,4 @@
-package org.rubatophil.www.api.response;
+package org.rubatophil.www.api.response.apply;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,10 +1,8 @@
 package org.rubatophil.www.api.controller;
 
-import org.rubatophil.www.api.request.ApplyForm;
 import org.rubatophil.www.api.request.DonateForm;
-import org.rubatophil.www.api.response.ApplyStateResponse;
-import org.rubatophil.www.api.response.DonateResponse;
-import org.rubatophil.www.api.response.DonateStateResponse;
+import org.rubatophil.www.api.response.donate.DonateResponse;
+import org.rubatophil.www.api.response.donate.DonateStateResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

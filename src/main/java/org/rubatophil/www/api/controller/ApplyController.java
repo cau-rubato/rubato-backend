@@ -1,9 +1,8 @@
 package org.rubatophil.www.api.controller;
 
 import org.rubatophil.www.api.request.ApplyForm;
-import org.rubatophil.www.api.response.ApplyDurationResponse;
-import org.rubatophil.www.api.response.ApplyStateResponse;
-import org.rubatophil.www.api.response.FAQResponse;
+import org.rubatophil.www.api.response.apply.ApplyDurationResponse;
+import org.rubatophil.www.api.response.apply.ApplyStateResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;

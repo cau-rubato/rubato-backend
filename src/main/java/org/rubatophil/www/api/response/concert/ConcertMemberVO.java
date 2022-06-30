@@ -1,4 +1,4 @@
-package org.rubatophil.www.api.response;
+package org.rubatophil.www.api.response.concert;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,12 +6,9 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @Getter @Setter
-public class MemberResponse {
-
+public class ConcertMemberVO {
     private String name;
-    private Integer generation;
-    private String instrument;
+    private Integer episode;
     private String department;
     private String studentId;
-
 }

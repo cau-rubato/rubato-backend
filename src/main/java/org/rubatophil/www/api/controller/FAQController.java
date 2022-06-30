@@ -1,6 +1,6 @@
 package org.rubatophil.www.api.controller;
 
-import org.rubatophil.www.api.response.FAQResponse;
+import org.rubatophil.www.api.response.faq.FAQResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 public class FAQController {
-    @GetMapping("/faq")
+    @GetMapping("/faqs")
     public List<FAQResponse> faqInfo() {
         List<FAQResponse> faqList = new ArrayList<>();
 
