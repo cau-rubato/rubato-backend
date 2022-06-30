@@ -22,6 +22,7 @@ public class Budget {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "donate_id")
     private Donate donate;
 
     @LastModifiedDate

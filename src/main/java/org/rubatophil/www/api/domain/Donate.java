@@ -26,7 +26,6 @@ public class Donate {
     private Member member;
 
     @OneToMany(mappedBy = "donate", cascade = CascadeType.ALL)
-    @JoinColumn(name = "budget_id")
     @NotNull
     private List<Budget> budgetPurposes;
 
