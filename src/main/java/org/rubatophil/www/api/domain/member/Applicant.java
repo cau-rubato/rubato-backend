@@ -5,9 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 import org.rubatophil.www.api.domain.Apply;
 import org.rubatophil.www.api.domain.Department;
+import org.rubatophil.www.api.domain.mapping.ApplicantExperience;
 import org.rubatophil.www.api.domain.type.Experience;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @DiscriminatorValue("APPLICANT")
@@ -25,7 +28,6 @@ public class Applicant extends Member {
     @OneToOne(mappedBy = "applicant", cascade = CascadeType.ALL)
     private Apply apply;
 
-    @Enumerated(EnumType.STRING)
-    @Embedded
-    private Experience experience;
+    @OneToMany(mappedBy = "applicant")
+    private List<ApplicantExperience> applicantExperiences = new ArrayList<>();
 }
