@@ -5,8 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import org.rubatophil.www.api.domain.type.Instrument;
 import org.rubatophil.www.api.domain.member.Member;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "MEMBER_INSTRUMENT")
@@ -24,4 +27,11 @@ public class MemberInstrument {
     @Enumerated(EnumType.STRING)
     @NotNull
     private Instrument instrument;
+
+    @LastModifiedDate
+    @NotNull
+    private LocalDateTime modifiedAt;
+    @CreatedDate
+    @NotNull
+    private LocalDateTime createdAt;
 }

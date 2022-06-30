@@ -4,6 +4,8 @@ import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.rubatophil.www.api.domain.type.Address;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -32,8 +34,10 @@ public class Member {
     @NotNull
     private String profileImage;
 
+    @LastModifiedDate
     @NotNull
     private LocalDateTime modifiedAt;
+    @CreatedDate
     @NotNull
     private LocalDateTime createdAt;
 }
