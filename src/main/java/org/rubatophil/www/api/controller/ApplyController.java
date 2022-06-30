@@ -21,10 +21,10 @@ public class ApplyController {
 
     @PostMapping("/apply")
     public ApplyStatusResponse apply(@RequestParam(value="apply_type") String applyType, @RequestBody ApplyForm applyForm) {
-        ApplyStatusResponse applyStateResponse = ApplyStatusResponse.builder()
+        ApplyStatusResponse applyStatusResponse = ApplyStatusResponse.builder()
                 .status("OK")
                 .build();
-        return applyStateResponse;
+        return applyStatusResponse;
     }
 
 }

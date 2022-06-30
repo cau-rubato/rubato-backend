@@ -25,8 +25,8 @@ public class DonateController {
 
     @PostMapping("/donate")
     public DonateStatusResponse donate(@RequestBody DonateForm donateForm) {
-        DonateStatusResponse donateStateResponse = DonateStatusResponse.builder().status("OK").build();
-        return donateStateResponse;
+        DonateStatusResponse donateStatusResponse = DonateStatusResponse.builder().status("OK").build();
+        return donateStatusResponse;
     }
 
 }
