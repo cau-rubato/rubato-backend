@@ -24,7 +24,7 @@ public class ConcertPamphlet {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "concert_id")
     @NotNull
-    private RegularConcert regularConcert;
+    private Concert concert;
 
     @NotNull
     private Integer pageNumber;
