@@ -13,7 +13,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@DiscriminatorValue("APPLY")
+@Table(name = "APPLY")
 @Getter @Setter
 public class Apply {
 
