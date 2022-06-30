@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.rubatophil.www.api.domain.Account;
 import org.rubatophil.www.api.domain.Donate;
-import org.rubatophil.www.api.domain.Manager;
 import org.rubatophil.www.api.domain.mapping.concertMember.ConcertMember;
 import org.rubatophil.www.api.domain.type.Address;
 import org.springframework.data.annotation.CreatedDate;
