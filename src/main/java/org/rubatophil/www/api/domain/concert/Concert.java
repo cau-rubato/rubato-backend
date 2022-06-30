@@ -30,10 +30,8 @@ public class Concert {
     private LocalDateTime date;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id")
-    @NotNull
     private Location location;
 
-    @NotNull
     private String posterUrl;
 
     @OneToMany(mappedBy = "concert", cascade = CascadeType.ALL)

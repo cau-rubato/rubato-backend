@@ -32,7 +32,6 @@ public class Manager {
 
     @NotNull
     private LocalDateTime startedAt;
-    @NotNull
     private LocalDateTime resignedAt;
 
     @Enumerated(EnumType.STRING)
