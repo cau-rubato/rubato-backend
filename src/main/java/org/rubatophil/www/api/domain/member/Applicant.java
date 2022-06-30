@@ -3,6 +3,7 @@ package org.rubatophil.www.api.domain.member;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.rubatophil.www.api.domain.Apply;
 import org.rubatophil.www.api.domain.Department;
 import org.rubatophil.www.api.domain.type.Experience;
 
@@ -20,6 +21,9 @@ public class Applicant extends Member {
 
     @NotNull
     private String studentId;
+
+    @OneToOne(mappedBy = "applicant", cascade = CascadeType.ALL)
+    private Apply apply;
 
     @Enumerated(EnumType.STRING)
     @Embedded
