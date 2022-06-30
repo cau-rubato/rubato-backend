@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "REGULAR_CONCERT")
+@DiscriminatorValue("REGULAR_CONCERT")
 @Getter @Setter
 public class RegularConcert extends Concert {
 
