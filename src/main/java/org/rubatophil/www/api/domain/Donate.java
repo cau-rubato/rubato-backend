@@ -27,7 +27,6 @@ public class Donate {
     private Member member;
 
     @OneToMany(mappedBy = "donate", cascade = CascadeType.ALL)
-    @NotNull
     private List<DonateBudget> donateBudgets;
 
     private String message;
