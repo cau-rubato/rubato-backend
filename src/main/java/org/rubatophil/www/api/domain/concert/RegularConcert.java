@@ -17,6 +17,8 @@ public class RegularConcert extends Concert {
     @NotNull
     private Integer episode;
 
+    private Integer fee;
+
     @OneToMany(mappedBy = "regularConcert", cascade = CascadeType.ALL)
     private List<ConcertPamphlet> concertPamphlets = new ArrayList<>();
 
