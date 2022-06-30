@@ -15,6 +15,16 @@ public class MemberController {
     public List<MemberResponse> searchMemberList(@RequestParam(value = "member_type") String memberType) {
         List<MemberResponse> memberResponses = new ArrayList<>();
 
+        MemberResponse member = MemberResponse.builder()
+                .name("백승윤")
+                .generation(33)
+                .department("전자전기공학부")
+                .instrument("Vc.")
+                .studentId("17")
+                .build();
+
+        memberResponses.add(member);
+
         return memberResponses;
     }
 

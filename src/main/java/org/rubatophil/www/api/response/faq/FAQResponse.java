@@ -1,10 +1,11 @@
 package org.rubatophil.www.api.response.faq;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-@AllArgsConstructor
+@Builder
 @Getter @Setter
 public class FAQResponse {
     private Long id;

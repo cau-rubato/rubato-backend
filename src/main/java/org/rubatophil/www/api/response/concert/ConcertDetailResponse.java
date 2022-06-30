@@ -1,6 +1,7 @@
 package org.rubatophil.www.api.response.concert;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
+@Builder
 @Getter @Setter
 public class ConcertDetailResponse {
 
@@ -17,7 +18,7 @@ public class ConcertDetailResponse {
     private String collaborator;
     private String concertmaster;
     private LocalDateTime date;
-    private String concertHall;
+    private String location;
 
     private String program;
 

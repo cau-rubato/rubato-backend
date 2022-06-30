@@ -2,7 +2,7 @@ package org.rubatophil.www.api.controller;
 
 import org.rubatophil.www.api.request.DonateForm;
 import org.rubatophil.www.api.response.donate.DonateResponse;
-import org.rubatophil.www.api.response.donate.DonateStateResponse;
+import org.rubatophil.www.api.response.donate.DonateStatusResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -16,16 +16,16 @@ public class DonateController {
 
         List<DonateResponse> donateResponses = new ArrayList<>();
 
-        donateResponses.add(new DonateResponse("백승윤"));
-        donateResponses.add(new DonateResponse("김혜성"));
+        donateResponses.add(DonateResponse.builder().name("백승윤").build());
+        donateResponses.add(DonateResponse.builder().name("김혜성").build());
 
         return donateResponses;
 
     }
 
     @PostMapping("/donate")
-    public DonateStateResponse donate(@RequestBody DonateForm donateForm) {
-        DonateStateResponse donateStateResponse = new DonateStateResponse("OK");
+    public DonateStatusResponse donate(@RequestBody DonateForm donateForm) {
+        DonateStatusResponse donateStateResponse = DonateStatusResponse.builder().status("OK").build();
         return donateStateResponse;
     }
 
