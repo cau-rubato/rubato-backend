@@ -48,4 +48,9 @@ class ApplyControllerTest {
         mvcResult.andExpect(status().isOk())
                 .andExpect(content().string(expectedJson));
     }
+
+    @Test
+    public void apply() throws Exception {
+
+    }
 }

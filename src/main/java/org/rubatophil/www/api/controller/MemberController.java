@@ -12,10 +12,10 @@ import java.util.List;
 public class MemberController {
 
     @GetMapping("/members")
-    public List<MemberResponse> searchMemberList(@RequestParam(value = "member_type") String member_type) {
-        List<MemberResponse> memberResponseList = new ArrayList<MemberResponse>();
+    public List<MemberResponse> searchMemberList(@RequestParam(value = "member_type") String memberType) {
+        List<MemberResponse> memberResponses = new ArrayList<>();
 
-        return memberResponseList;
+        return memberResponses;
     }
 
 }

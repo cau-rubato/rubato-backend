@@ -38,7 +38,7 @@ class FAQControllerTest {
     public void faqInfo() throws Exception {
         //given
         String url = "/faq";
-        String expectedJson = "[{\"id\":0,\"title\":\"몇살이에요?\",\"detail\":\"25살\"},{\"id\":1,\"title\":\"어떻게 가입해요?\",\"detail\":\"몰라요\"}]";
+        String expectedJson = "[{\"id\":0,\"question\":\"몇살이에요?\",\"answer\":\"25살\"},{\"id\":1,\"question\":\"어떻게 가입해요?\",\"answer\":\"몰라요\"}]";
 
         //when
         ResultActions mvcResult = mockMvc.perform(get(url));

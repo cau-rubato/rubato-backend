@@ -1,9 +1,10 @@
 package org.rubatophil.www.api.controller;
 
+import org.rubatophil.www.api.request.ApplyForm;
 import org.rubatophil.www.api.response.ApplyDurationResponse;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.rubatophil.www.api.response.ApplyStateResponse;
+import org.rubatophil.www.api.response.FAQResponse;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -17,6 +18,12 @@ public class ApplyController {
         );
 
         return applyDurationResponse;
+    }
+
+    @PostMapping("/apply")
+    public ApplyStateResponse apply(@RequestParam(value="apply_type") String applyType, @RequestBody ApplyForm applyForm) {
+        ApplyStateResponse applyStateResponse = new ApplyStateResponse("OK");
+        return applyStateResponse;
     }
 
 }
