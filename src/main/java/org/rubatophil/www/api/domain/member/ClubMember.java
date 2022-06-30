@@ -15,6 +15,9 @@ import java.util.List;
 @Getter @Setter
 public class ClubMember extends Member {
 
+    @NotNull
+    private Integer generation;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     @NotNull
