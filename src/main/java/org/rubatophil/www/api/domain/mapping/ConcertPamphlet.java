@@ -1,35 +1,35 @@
-package org.rubatophil.www.api.domain.type;
+package org.rubatophil.www.api.domain.mapping;
 
 import com.sun.istack.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.rubatophil.www.api.domain.concert.Concert;
+import org.rubatophil.www.api.domain.concert.RegularConcert;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-@Table(name = "LOCATION")
+@Table(name = "CONCERT_PAMPHLET")
 @Getter @Setter
-public class Location {
+public class ConcertPamphlet {
 
     @Id @GeneratedValue
-    @Column(name = "location_id")
-    private Long id;
+    @Column(name = "concert_pamphlet_id")
+    private long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "concert_id")
+    @NotNull
+    private RegularConcert regularConcert;
 
     @NotNull
-    private String name;
-
-    @Embedded
+    private Integer pageNumber;
     @NotNull
-    private Address address;
-
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
-    private List<Concert> concerts = new ArrayList<>();
+    private String imageUrl;
 
     @LastModifiedDate
     @NotNull
