@@ -3,11 +3,14 @@ package org.rubatophil.www.api.domain;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.rubatophil.www.api.domain.mapping.DonateBudget;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "BUDGET")
@@ -21,9 +24,8 @@ public class Budget {
     @NotNull
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "donate_id")
-    private Donate donate;
+    @OneToMany(mappedBy = "budget", cascade = CascadeType.ALL)
+    private List<DonateBudget> donateBudgets = new ArrayList<>();
 
     @LastModifiedDate
     @NotNull
