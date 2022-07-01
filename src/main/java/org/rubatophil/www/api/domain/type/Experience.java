@@ -14,13 +14,13 @@ public class Experience {
     @NotNull
     private Instrument instrument;
     @NotNull
-    private Integer year;
+    private Integer experienceYear;
 
     protected Experience() {}
 
     @Builder
-    public Experience(Instrument instrument, Integer year) {
+    public Experience(Instrument instrument, Integer experienceYear) {
         this.instrument = instrument;
-        this.year = year;
+        this.experienceYear = experienceYear;
     }
 }
