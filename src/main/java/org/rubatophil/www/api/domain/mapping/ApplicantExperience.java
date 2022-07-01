@@ -1,12 +1,15 @@
 package org.rubatophil.www.api.domain.mapping;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.rubatophil.www.api.domain.member.Applicant;
 import org.rubatophil.www.api.domain.type.Experience;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "APPLICATION_EXPERIENCE")
@@ -24,4 +27,9 @@ public class ApplicantExperience {
 
     @Embedded
     private Experience experience;
+
+    @LastModifiedDate
+    private LocalDateTime modifiedAt;
+    @CreatedDate
+    private LocalDateTime createdAt;
 }

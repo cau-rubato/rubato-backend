@@ -1,6 +1,5 @@
 package org.rubatophil.www.api.domain.member;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
