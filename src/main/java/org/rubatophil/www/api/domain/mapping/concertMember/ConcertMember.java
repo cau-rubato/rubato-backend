@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
 @Getter @Setter
-public class ConcertMember {
+public abstract class ConcertMember {
 
     @Id @GeneratedValue
     @Column(name = "concert_member_id")

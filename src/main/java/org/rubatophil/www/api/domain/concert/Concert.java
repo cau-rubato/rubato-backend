@@ -18,7 +18,7 @@ import java.util.List;
 @Entity
 @Table(name = "CONCERT")
 @Getter @Setter
-public class Concert {
+public abstract class Concert {
 
     @Id @GeneratedValue
     @Column(name = "concert_id")
