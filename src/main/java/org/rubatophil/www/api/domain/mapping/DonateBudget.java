@@ -4,9 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import org.rubatophil.www.api.domain.Budget;
 import org.rubatophil.www.api.domain.Donate;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "DONATE_BUDGET")
@@ -26,4 +29,9 @@ public class DonateBudget {
     @JoinColumn(name = "budget_id")
     @NotNull
     private Budget budget;
+
+    @LastModifiedDate
+    private LocalDateTime modifiedAt;
+    @CreatedDate
+    private LocalDateTime createdAt;
 }
