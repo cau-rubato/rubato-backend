@@ -35,10 +35,8 @@ public class ApplyCampaign {
     private Apply apply;
 
     @LastModifiedDate
-    @NotNull
     private LocalDateTime modifiedAt;
     @CreatedDate
-    @NotNull
     private LocalDateTime createdAt;
 
     @PrePersist

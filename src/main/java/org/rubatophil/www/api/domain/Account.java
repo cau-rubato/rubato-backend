@@ -35,10 +35,8 @@ public class Account {
     private AccountStatus status;
 
     @LastModifiedDate
-    @NotNull
     private LocalDateTime modifiedAt;
     @CreatedDate
-    @NotNull
     private LocalDateTime createdAt;
 
     @PrePersist

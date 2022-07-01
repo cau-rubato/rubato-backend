@@ -32,9 +32,7 @@ public class Location {
     private List<Concert> concerts = new ArrayList<>();
 
     @LastModifiedDate
-    @NotNull
     private LocalDateTime modifiedAt;
     @CreatedDate
-    @NotNull
     private LocalDateTime createdAt;
 }

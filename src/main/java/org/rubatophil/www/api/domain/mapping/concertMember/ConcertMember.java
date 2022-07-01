@@ -46,9 +46,7 @@ public class ConcertMember {
     private ConcertRole concertRole;
 
     @LastModifiedDate
-    @NotNull
     private LocalDateTime modifiedAt;
     @CreatedDate
-    @NotNull
     private LocalDateTime createdAt;
 }

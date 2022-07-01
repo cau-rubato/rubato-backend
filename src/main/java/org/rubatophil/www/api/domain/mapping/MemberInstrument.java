@@ -29,9 +29,7 @@ public class MemberInstrument {
     private Instrument instrument;
 
     @LastModifiedDate
-    @NotNull
     private LocalDateTime modifiedAt;
     @CreatedDate
-    @NotNull
     private LocalDateTime createdAt;
 }

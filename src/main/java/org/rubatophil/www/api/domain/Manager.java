@@ -39,10 +39,8 @@ public class Manager {
     private ManagerStatus status;
 
     @LastModifiedDate
-    @NotNull
     private LocalDateTime modifiedAt;
     @CreatedDate
-    @NotNull
     private LocalDateTime createdAt;
 
     @PrePersist

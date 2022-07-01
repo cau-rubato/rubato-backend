@@ -49,9 +49,7 @@ public class Member {
     private String profileImage;
 
     @LastModifiedDate
-    @NotNull
     private LocalDateTime modifiedAt;
     @CreatedDate
-    @NotNull
     private LocalDateTime createdAt;
 }

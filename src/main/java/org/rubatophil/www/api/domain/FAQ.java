@@ -25,7 +25,6 @@ public class FAQ {
 
     @LastModifiedDate
     private LocalDateTime modifiedAt;
-
     @CreatedDate
     private LocalDateTime createdAt;
 }

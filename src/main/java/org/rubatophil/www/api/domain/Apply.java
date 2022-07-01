@@ -43,10 +43,8 @@ public class Apply {
     private Boolean isApproved;
 
     @LastModifiedDate
-    @NotNull
     private LocalDateTime modifiedAt;
     @CreatedDate
-    @NotNull
     private LocalDateTime createdAt;
 
     @PrePersist

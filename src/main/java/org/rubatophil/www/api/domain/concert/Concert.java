@@ -46,10 +46,8 @@ public class Concert {
     private ApplyStatus applyStatus;
 
     @LastModifiedDate
-    @NotNull
     private LocalDateTime modifiedAt;
     @CreatedDate
-    @NotNull
     private LocalDateTime createdAt;
 
     @PrePersist

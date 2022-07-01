@@ -30,9 +30,7 @@ public class ConcertPamphlet {
     private String imageUrl;
 
     @LastModifiedDate
-    @NotNull
     private LocalDateTime modifiedAt;
     @CreatedDate
-    @NotNull
     private LocalDateTime createdAt;
 }

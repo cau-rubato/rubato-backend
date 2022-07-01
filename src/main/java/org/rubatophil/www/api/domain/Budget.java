@@ -28,9 +28,7 @@ public class Budget {
     private List<DonateBudget> donateBudgets = new ArrayList<>();
 
     @LastModifiedDate
-    @NotNull
     private LocalDateTime modifiedAt;
     @CreatedDate
-    @NotNull
     private LocalDateTime createdAt;
 }
