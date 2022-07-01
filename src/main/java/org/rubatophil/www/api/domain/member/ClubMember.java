@@ -1,6 +1,5 @@
 package org.rubatophil.www.api.domain.member;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.rubatophil.www.api.domain.Department;
@@ -8,6 +7,7 @@ import org.rubatophil.www.api.domain.Manager;
 import org.rubatophil.www.api.domain.mapping.MemberInstrument;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity

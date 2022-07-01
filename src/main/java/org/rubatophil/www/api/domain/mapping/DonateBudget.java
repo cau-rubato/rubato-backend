@@ -1,12 +1,12 @@
 package org.rubatophil.www.api.domain.mapping;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.rubatophil.www.api.domain.Budget;
 import org.rubatophil.www.api.domain.Donate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "DONATE_BUDGET")

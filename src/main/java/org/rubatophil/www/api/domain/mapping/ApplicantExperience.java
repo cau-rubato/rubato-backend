@@ -1,12 +1,12 @@
 package org.rubatophil.www.api.domain.mapping;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.rubatophil.www.api.domain.member.Applicant;
 import org.rubatophil.www.api.domain.type.Experience;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "APPLICATION_EXPERIENCE")
