@@ -20,7 +20,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
 @Getter @Setter
-public class Member {
+public abstract class Member {
 
     @Id @GeneratedValue
     @Column(name = "member_id")
