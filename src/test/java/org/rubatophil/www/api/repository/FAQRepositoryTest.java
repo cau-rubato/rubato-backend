@@ -26,7 +26,6 @@ class FAQRepositoryTest {
     FAQRepository faqRepository;
 
     @Test
-    @Transactional
     @DisplayName("FAQ Table에 한개의 값이 잘 들어가고 조회되는지 테스트")
     public void oneFAQTest() throws Exception {
         //given
