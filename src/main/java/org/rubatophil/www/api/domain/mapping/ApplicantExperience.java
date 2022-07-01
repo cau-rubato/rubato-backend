@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "APPLICATION_EXPERIENCE")
+@Table(name = "APPLICANT_EXPERIENCE")
 @Getter @Setter
 public class ApplicantExperience {
 
