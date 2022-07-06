@@ -3,6 +3,7 @@ package org.rubatophil.www.api.domain.concert;
 import lombok.Getter;
 import lombok.Setter;
 import org.rubatophil.www.api.domain.mapping.ConcertPamphlet;
+import org.rubatophil.www.api.domain.mapping.ConcertPiece;
 import org.rubatophil.www.api.domain.mapping.concertMember.ConcertMember;
 import org.rubatophil.www.api.domain.type.ApplyStatus;
 import org.rubatophil.www.api.domain.type.Location;
@@ -40,6 +41,9 @@ public abstract class Concert {
 
     @OneToMany(mappedBy = "concert", cascade = CascadeType.ALL)
     private List<ConcertPamphlet> concertPamphlets = new ArrayList<>();
+
+    @OneToMany(mappedBy = "concert", cascade = CascadeType.ALL)
+    private List<ConcertPiece> concertPieces = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     @NotNull
