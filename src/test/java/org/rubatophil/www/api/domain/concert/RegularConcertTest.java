@@ -117,9 +117,10 @@ public class RegularConcertTest {
 
         //then
         RegularConcert emfindRegularConcert = em.find(RegularConcert.class, regularConcert.getId());
+        RegularConcertPiece emfindRegularConcertPiece = em.find(RegularConcertPiece.class, firstConcertPiece.getId());
 
         assertEquals(this.regularConcert.getRegularConcertPieces().get(0), emfindRegularConcert.getRegularConcertPieces().get(0));
-        assertEquals(firstConcertPiece.getRegularConcert(), emfindRegularConcert);
+        assertEquals(emfindRegularConcertPiece.getRegularConcert(), emfindRegularConcert);
 
     }
 }
