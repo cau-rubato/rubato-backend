@@ -33,8 +33,8 @@ public class SponsorTest {
     @BeforeEach
     void setUp() {
         this.account = Account.builder()
-                .login_id("test_id")
-                .login_pw("test_pw")
+                .loginId("test_id")
+                .loginPw("test_pw")
                 .build();
 
         this.address = Address.builder()
