@@ -7,6 +7,7 @@ import org.rubatophil.www.api.domain.type.Address;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,10 +17,16 @@ import java.util.List;
 public class GuestMember extends Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberInstrument> memberInstruments;
+    @Setter(AccessLevel.NONE)
+    private List<MemberInstrument> memberInstruments = new ArrayList<>();
 
     @Builder
     public GuestMember(Account account, String name, LocalDate birth, String phoneNumber, Address address, List<MemberInstrument> memberInstruments) {
         super(account, name, birth, phoneNumber, address);
+    }
+
+    public void addMemberInstrument(MemberInstrument memberInstrument) {
+        this.memberInstruments.add(memberInstrument);
+        memberInstrument.setMember(this);
     }
 }

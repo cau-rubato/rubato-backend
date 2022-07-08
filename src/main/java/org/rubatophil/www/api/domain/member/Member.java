@@ -12,6 +12,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -31,19 +32,26 @@ public abstract class Member {
     private Long id;
 
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
+    @Setter(AccessLevel.NONE)
     private Account account;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @Setter(AccessLevel.NONE)
     private List<Donate> donates = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @Setter(AccessLevel.NONE)
     private List<ConcertMember> members = new ArrayList<>();
 
+    @NotNull
     private String name;
+    @NotNull
     private LocalDate birth;
+    @NotNull
     private String phoneNumber;
 
     @Embedded
+    @NotNull
     private Address address;
     private String profileImage;
 
@@ -60,6 +68,16 @@ public abstract class Member {
         this.birth = birth;
         this.phoneNumber = phoneNumber;
         this.address = address;
+    }
+
+    public void addDonate(Donate donate) {
+        this.donates.add(donate);
+        donate.setMember(this);
+    }
+
+    public void addConcertMember(ConcertMember concertMember) {
+        this.members.add(concertMember);
+        concertMember.setMember(this);
     }
 
     @PrePersist

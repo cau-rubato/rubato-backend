@@ -9,7 +9,6 @@ import org.rubatophil.www.api.domain.type.Part;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.PrePersist;
 
 @Entity
 @DiscriminatorValue("CLUB_CONCERT_MEMBER")
@@ -25,8 +24,8 @@ public class ClubConcertMember extends ConcertMember {
         this.currentPaidFee = currentPaidFee;
     }
 
-    @PrePersist
     public void PrePersist() {
+        super.PrePersist();
         this.currentPaidFee = this.currentPaidFee == null ? 0 : this.currentPaidFee;
     }
 }

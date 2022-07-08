@@ -42,7 +42,6 @@ public abstract class ConcertMember {
     @Enumerated(EnumType.STRING)
     private Part part;
     @Enumerated(EnumType.STRING)
-    @NotNull
     private ConcertRole concertRole;
 
     @LastModifiedDate
