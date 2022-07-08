@@ -84,7 +84,9 @@ public class ConcertTest {
         //given
         //when
         //then
-        assertEquals(this.regularConcert.getApplyStatus(), ApplyStatus.CLOSED);
+        RegularConcert emfindRegularConcert = em.find(RegularConcert.class, this.regularConcert.getId());
+
+        assertEquals(emfindRegularConcert.getApplyStatus(), ApplyStatus.CLOSED);
     }
 
     @Test
@@ -106,7 +108,6 @@ public class ConcertTest {
         em.persist(clubMember);
 
         ClubConcertMember clubConcertMember = ClubConcertMember.builder()
-                .member(clubMember)
                 .instrument(Instrument.VIOLIN)
                 .concertRole(ConcertRole.GENERAL)
                 .build();
@@ -118,9 +119,10 @@ public class ConcertTest {
 
         //then
         RegularConcert emfindRegularConcert = em.find(RegularConcert.class, regularConcert.getId());
+        ClubConcertMember emfindClubConcertMember = em.find(ClubConcertMember.class, clubConcertMember.getId());
 
         assertEquals(this.regularConcert.getConcertMembers().get(0), emfindRegularConcert.getConcertMembers().get(0));
-        assertEquals(clubConcertMember.getConcert(), emfindRegularConcert);
+        assertEquals(emfindClubConcertMember.getConcert(), emfindRegularConcert);
     }
 
     @Test
@@ -139,7 +141,6 @@ public class ConcertTest {
         em.persist(guestMember);
 
         GuestConcertMember guestConcertMember = GuestConcertMember.builder()
-                .member(guestMember)
                 .instrument(Instrument.VIOLIN)
                 .part(Part.FIRST_VIOLIN)
                 .concertRole(ConcertRole.GENERAL)
@@ -153,9 +154,11 @@ public class ConcertTest {
 
         //then
         RegularConcert emfindRegularConcert = em.find(RegularConcert.class, regularConcert.getId());
+        GuestConcertMember emfindGuestConcertMember = em.find(GuestConcertMember.class, guestConcertMember.getId());
+
 
         assertEquals(this.regularConcert.getConcertMembers().get(0), emfindRegularConcert.getConcertMembers().get(0));
-        assertEquals(guestConcertMember.getConcert(), emfindRegularConcert);
+        assertEquals(emfindGuestConcertMember.getConcert(), emfindRegularConcert);
     }
 
     @Test
@@ -175,8 +178,9 @@ public class ConcertTest {
 
         //then
         RegularConcert emfindRegularConcert = em.find(RegularConcert.class, regularConcert.getId());
+        ConcertPamphlet emfindConcertPamphlet = em.find(ConcertPamphlet.class, firstConcertPamphlet.getId());
 
         assertEquals(this.regularConcert.getConcertPamphlets().get(0), emfindRegularConcert.getConcertPamphlets().get(0));
-        assertEquals(firstConcertPamphlet.getConcert(), emfindRegularConcert);
+        assertEquals(emfindConcertPamphlet.getConcert(), emfindRegularConcert);
     }
 }

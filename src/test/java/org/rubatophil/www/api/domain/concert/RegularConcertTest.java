@@ -69,8 +69,10 @@ public class RegularConcertTest {
         //given
         //when
         //then
-        assertEquals(this.regularConcert.getApplyStatus(), ApplyStatus.CLOSED);
-        assertEquals(this.regularConcert.getFee(), 0);
+        RegularConcert emfindRegularConcert = em.find(RegularConcert.class, this.regularConcert.getId());
+
+        assertEquals(emfindRegularConcert.getApplyStatus(), ApplyStatus.CLOSED);
+        assertEquals(emfindRegularConcert.getFee(), 0);
     }
 
     @Test
@@ -80,11 +82,13 @@ public class RegularConcertTest {
         //given
         //when
         //then
-        assertEquals(this.regularConcert.getName(), "test regular concert");
-        assertEquals(this.regularConcert.getDate(), LocalDateTime.of(2022, 07, 07, 20, 0, 0, 0));
-        assertEquals(this.regularConcert.getLocation(), concertHallLocation);
-        assertEquals(this.regularConcert.getPosterUrl(), "www.poster.com");
-        assertEquals(this.regularConcert.getEpisode(), 0);
+        RegularConcert emfindRegularConcert = em.find(RegularConcert.class, this.regularConcert.getId());
+
+        assertEquals(emfindRegularConcert.getName(), "test regular concert");
+        assertEquals(emfindRegularConcert.getDate(), LocalDateTime.of(2022, 07, 07, 20, 0, 0, 0));
+        assertEquals(emfindRegularConcert.getLocation(), concertHallLocation);
+        assertEquals(emfindRegularConcert.getPosterUrl(), "www.poster.com");
+        assertEquals(emfindRegularConcert.getEpisode(), 0);
     }
 
     @Test
@@ -117,9 +121,10 @@ public class RegularConcertTest {
 
         //then
         RegularConcert emfindRegularConcert = em.find(RegularConcert.class, regularConcert.getId());
+        RegularConcertPiece emfindRegularConcertPiece = em.find(RegularConcertPiece.class, firstConcertPiece.getId());
 
         assertEquals(this.regularConcert.getRegularConcertPieces().get(0), emfindRegularConcert.getRegularConcertPieces().get(0));
-        assertEquals(firstConcertPiece.getRegularConcert(), emfindRegularConcert);
+        assertEquals(emfindRegularConcertPiece.getRegularConcert(), emfindRegularConcert);
 
     }
 }
