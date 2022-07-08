@@ -98,14 +98,23 @@ public class RegularConcertTest {
         Composer firstPieceComposer = Composer.builder()
                 .name("first piece composer name")
                 .build();
+
+        em.persist(firstPieceComposer);
+
         Piece firstPiece = Piece.builder()
                 .name("first piece name")
                 .composer(firstPieceComposer)
                 .build();
+
+        em.persist(firstPiece);
+
         RegularConcertPiece firstConcertPiece = RegularConcertPiece.builder()
                 .piece(firstPiece)
                 .section(RegularConcertSection.FIRST)
                 .build();
+
+        em.persist(firstConcertPiece);
+
         //when
         this.regularConcert.addRegularConcertPiece(firstConcertPiece);
 
@@ -113,7 +122,7 @@ public class RegularConcertTest {
         testRegularConcertPieceList.add(firstConcertPiece);
 
         //then
-        assertArrayEquals(this.regularConcert.getRegularConcertPieces().toArray(), testRegularConcertPieceList.toArray());
-        assertEquals(firstConcertPiece.getRegularConcert(), this.regularConcert);
+        RegularConcert emfindRegularConcert = em.find(RegularConcert.class, regularConcert.getId());
+        assertEquals(this.regularConcert.getRegularConcertPieces().get(0), emfindRegularConcert.getRegularConcertPieces().get(0));
     }
 }

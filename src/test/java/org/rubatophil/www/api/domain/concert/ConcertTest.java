@@ -1,6 +1,5 @@
 package org.rubatophil.www.api.domain.concert;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,7 +40,7 @@ public class ConcertTest {
     Location concertHallLocation;
     RegularConcert regularConcert;
     Account account;
-    Department SWdepartment;
+    Department swDepartment;
 
     @BeforeEach
     void setUp() {
@@ -71,7 +70,7 @@ public class ConcertTest {
                 .login_pw("test_pw")
                 .build();
 
-        this.SWdepartment = Department.builder()
+        this.swDepartment = Department.builder()
                 .college("창의ICT공과대학")
                 .school("소프트웨어학부")
                 .build();
@@ -79,7 +78,7 @@ public class ConcertTest {
         em.persist(this.concertHallLocation);
         em.persist(this.regularConcert);
         em.persist(this.account);
-        em.persist(this.SWdepartment);
+        em.persist(this.swDepartment);
     }
 
     @Test
@@ -104,9 +103,11 @@ public class ConcertTest {
                 .phoneNumber("01000000000")
                 .address(this.concertHallAddress)
                 .generation(34)
-                .department(SWdepartment)
+                .department(swDepartment)
                 .studentId("20180000")
                 .build();
+
+        em.persist(clubMember);
 
         ClubConcertMember clubConcertMember = ClubConcertMember.builder()
                 .member(clubMember)
@@ -114,15 +115,15 @@ public class ConcertTest {
                 .concertRole(ConcertRole.GENERAL)
                 .build();
 
+        em.persist(clubConcertMember);
+
         //when
         this.regularConcert.addConcertMember(clubConcertMember);
 
-        List<ConcertMember> testConcertMemberList = new ArrayList<>();
-        testConcertMemberList.add(clubConcertMember);
-
         //then
-        assertArrayEquals(this.regularConcert.getConcertMembers().toArray(), testConcertMemberList.toArray());
-        assertEquals(clubConcertMember.getConcert(), this.regularConcert);
+        RegularConcert emfindRegularConcert = em.find(RegularConcert.class, regularConcert.getId());
+
+        assertEquals(this.regularConcert.getConcertMembers().get(0), emfindRegularConcert.getConcertMembers().get(0));
     }
 
     @Test
@@ -138,6 +139,8 @@ public class ConcertTest {
                 .address(this.concertHallAddress)
                 .build();
 
+        em.persist(guestMember);
+
         GuestConcertMember guestConcertMember = GuestConcertMember.builder()
                 .member(guestMember)
                 .instrument(Instrument.VIOLIN)
@@ -146,15 +149,15 @@ public class ConcertTest {
                 .salary(100000)
                 .build();
 
+        em.persist(guestConcertMember);
+
         //when
         this.regularConcert.addConcertMember(guestConcertMember);
 
-        List<ConcertMember> testConcertMemberList = new ArrayList<>();
-        testConcertMemberList.add(guestConcertMember);
-
         //then
-        assertArrayEquals(this.regularConcert.getConcertMembers().toArray(), testConcertMemberList.toArray());
-        assertEquals(guestConcertMember.getConcert(), this.regularConcert);
+        RegularConcert emfindRegularConcert = em.find(RegularConcert.class, regularConcert.getId());
+
+        assertEquals(this.regularConcert.getConcertMembers().get(0), emfindRegularConcert.getConcertMembers().get(0));
     }
 
     @Test
@@ -167,14 +170,14 @@ public class ConcertTest {
                 .imageUrl("www.first.com")
                 .build();
 
+        em.persist(firstConcertPamphlet);
+
         //when
         this.regularConcert.addConcertPamphlet(firstConcertPamphlet);
 
-        List<ConcertPamphlet> testConcertPamphletList = new ArrayList<>();
-        testConcertPamphletList.add(firstConcertPamphlet);
-
         //then
-        assertArrayEquals(this.regularConcert.getConcertPamphlets().toArray(), testConcertPamphletList.toArray());
-        assertEquals(firstConcertPamphlet.getConcert(), this.regularConcert);
+        RegularConcert emfindRegularConcert = em.find(RegularConcert.class, regularConcert.getId());
+
+        assertEquals(this.regularConcert.getConcertPamphlets().get(0), emfindRegularConcert.getConcertPamphlets().get(0));
     }
 }
