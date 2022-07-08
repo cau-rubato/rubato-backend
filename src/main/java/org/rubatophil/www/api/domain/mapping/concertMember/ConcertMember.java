@@ -1,7 +1,6 @@
 package org.rubatophil.www.api.domain.mapping.concertMember;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.rubatophil.www.api.domain.concert.Concert;
 import org.rubatophil.www.api.domain.member.Member;
 import org.rubatophil.www.api.domain.type.ConcertRole;
@@ -19,10 +18,12 @@ import java.time.LocalDateTime;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class ConcertMember {
 
     @Id @GeneratedValue
     @Column(name = "concert_member_id")
+    @Setter(AccessLevel.NONE)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -39,14 +40,28 @@ public abstract class ConcertMember {
     @NotNull
     private Instrument instrument;
     @Enumerated(EnumType.STRING)
-    @NotNull
     private Part part;
     @Enumerated(EnumType.STRING)
     @NotNull
     private ConcertRole concertRole;
 
     @LastModifiedDate
+    @Setter(AccessLevel.NONE)
     private LocalDateTime modifiedAt;
     @CreatedDate
+    @Setter(AccessLevel.NONE)
     private LocalDateTime createdAt;
+
+    public ConcertMember(Member member, Concert concert, Instrument instrument, Part part, ConcertRole concertRole) {
+        this.member = member;
+        this.concert = concert;
+        this.instrument = instrument;
+        this.part = part;
+        this.concertRole = concertRole;
+    }
+
+    @PrePersist
+    public void PrePersist() {
+        this.concertRole = this.concertRole == null ? ConcertRole.GENERAL : this.concertRole;
+    }
 }
