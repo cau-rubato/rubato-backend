@@ -1,7 +1,6 @@
 package org.rubatophil.www.api.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -14,10 +13,12 @@ import java.util.List;
 @Entity
 @Table(name = "COMPOSER")
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Composer {
 
     @Id @GeneratedValue
     @Column(name = "composer_id")
+    @Setter(AccessLevel.NONE)
     private Long id;
 
     @NotNull
@@ -27,7 +28,14 @@ public class Composer {
     private List<Piece> pieces = new ArrayList<>();
 
     @LastModifiedDate
+    @Setter(AccessLevel.NONE)
     private LocalDateTime modifiedAt;
     @CreatedDate
+    @Setter(AccessLevel.NONE)
     private LocalDateTime createdAt;
+
+    @Builder
+    public Composer(String name) {
+        this.name = name;
+    }
 }

@@ -1,9 +1,7 @@
 package org.rubatophil.www.api.domain.concert;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.rubatophil.www.api.domain.mapping.ConcertPamphlet;
-import org.rubatophil.www.api.domain.mapping.ConcertPiece;
 import org.rubatophil.www.api.domain.mapping.concertMember.ConcertMember;
 import org.rubatophil.www.api.domain.type.ApplyStatus;
 import org.rubatophil.www.api.domain.type.Location;
@@ -18,17 +16,19 @@ import java.util.List;
 
 @Entity
 @Table(name = "CONCERT")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "dtype")
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Concert {
 
     @Id @GeneratedValue
     @Column(name = "concert_id")
+    @Setter(AccessLevel.NONE)
     private Long id;
 
     @NotNull
     private String name;
-
-    @NotNull
     private LocalDateTime date;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location_id")
@@ -37,25 +37,42 @@ public abstract class Concert {
     private String posterUrl;
 
     @OneToMany(mappedBy = "concert", cascade = CascadeType.ALL)
+    @Setter(AccessLevel.NONE)
     private List<ConcertMember> concertMembers = new ArrayList<>();
 
     @OneToMany(mappedBy = "concert", cascade = CascadeType.ALL)
+    @Setter(AccessLevel.NONE)
     private List<ConcertPamphlet> concertPamphlets = new ArrayList<>();
 
-    @OneToMany(mappedBy = "concert", cascade = CascadeType.ALL)
-    private List<ConcertPiece> concertPieces = new ArrayList<>();
-
     @Enumerated(EnumType.STRING)
-    @NotNull
     private ApplyStatus applyStatus;
 
     @LastModifiedDate
+    @Setter(AccessLevel.NONE)
     private LocalDateTime modifiedAt;
     @CreatedDate
+    @Setter(AccessLevel.NONE)
     private LocalDateTime createdAt;
+
+    public Concert(String name, LocalDateTime date, Location location, String posterUrl) {
+        this.name = name;
+        this.date = date;
+        this.location = location;
+        this.posterUrl = posterUrl;
+    }
+
+    public void addConcertMember(ConcertMember concertMember) {
+        this.concertMembers.add(concertMember);
+        concertMember.setConcert(this);
+    }
+
+    public void addConcertPamphlet(ConcertPamphlet concertPamphlet) {
+        this.concertPamphlets.add(concertPamphlet);
+        concertPamphlet.setConcert(this);
+    }
 
     @PrePersist
     public void PrePersist() {
-        this.applyStatus = this.applyStatus == null ? ApplyStatus.OPENED : this.applyStatus;
+        this.applyStatus = this.applyStatus == null ? ApplyStatus.CLOSED : this.applyStatus;
     }
 }
