@@ -106,7 +106,6 @@ public class ConcertTest {
         em.persist(clubMember);
 
         ClubConcertMember clubConcertMember = ClubConcertMember.builder()
-                .member(clubMember)
                 .instrument(Instrument.VIOLIN)
                 .concertRole(ConcertRole.GENERAL)
                 .build();
@@ -139,7 +138,6 @@ public class ConcertTest {
         em.persist(guestMember);
 
         GuestConcertMember guestConcertMember = GuestConcertMember.builder()
-                .member(guestMember)
                 .instrument(Instrument.VIOLIN)
                 .part(Part.FIRST_VIOLIN)
                 .concertRole(ConcertRole.GENERAL)
