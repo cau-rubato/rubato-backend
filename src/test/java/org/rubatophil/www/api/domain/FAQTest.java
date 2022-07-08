@@ -35,8 +35,10 @@ class FAQTest {
         FAQ newFaq = em.find(FAQ.class, faqId);
 
         //then
-        assertEquals(faq.getAnswer(), newFaq.getAnswer());
+        assertEquals(faq.getQuestion(), "Q");
+        assertEquals(faq.getAnswer(), "A");
         assertEquals(faq.getQuestion(), newFaq.getQuestion());
+        assertEquals(faq.getAnswer(), newFaq.getAnswer());
     }
 
 }
