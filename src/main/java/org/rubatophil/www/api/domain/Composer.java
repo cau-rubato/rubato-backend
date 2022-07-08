@@ -30,6 +30,7 @@ public class Composer {
     @LastModifiedDate
     @Setter(AccessLevel.NONE)
     private LocalDateTime modifiedAt;
+
     @CreatedDate
     @Setter(AccessLevel.NONE)
     private LocalDateTime createdAt;
@@ -38,4 +39,10 @@ public class Composer {
     public Composer(String name) {
         this.name = name;
     }
+
+    public void addPiece(Piece piece) {
+        this.pieces.add(piece);
+        piece.setComposer(this);
+    }
+
 }
