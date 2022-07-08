@@ -8,7 +8,6 @@ import org.rubatophil.www.api.domain.Account;
 import org.rubatophil.www.api.domain.Department;
 import org.rubatophil.www.api.domain.mapping.ConcertPamphlet;
 import org.rubatophil.www.api.domain.mapping.concertMember.ClubConcertMember;
-import org.rubatophil.www.api.domain.mapping.concertMember.ConcertMember;
 import org.rubatophil.www.api.domain.mapping.concertMember.GuestConcertMember;
 import org.rubatophil.www.api.domain.member.ClubMember;
 import org.rubatophil.www.api.domain.member.GuestMember;
@@ -21,10 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
@@ -124,6 +120,7 @@ public class ConcertTest {
         RegularConcert emfindRegularConcert = em.find(RegularConcert.class, regularConcert.getId());
 
         assertEquals(this.regularConcert.getConcertMembers().get(0), emfindRegularConcert.getConcertMembers().get(0));
+        assertEquals(clubConcertMember.getConcert(), emfindRegularConcert);
     }
 
     @Test
@@ -158,6 +155,7 @@ public class ConcertTest {
         RegularConcert emfindRegularConcert = em.find(RegularConcert.class, regularConcert.getId());
 
         assertEquals(this.regularConcert.getConcertMembers().get(0), emfindRegularConcert.getConcertMembers().get(0));
+        assertEquals(guestConcertMember.getConcert(), emfindRegularConcert);
     }
 
     @Test
@@ -179,5 +177,6 @@ public class ConcertTest {
         RegularConcert emfindRegularConcert = em.find(RegularConcert.class, regularConcert.getId());
 
         assertEquals(this.regularConcert.getConcertPamphlets().get(0), emfindRegularConcert.getConcertPamphlets().get(0));
+        assertEquals(firstConcertPamphlet.getConcert(), emfindRegularConcert);
     }
 }

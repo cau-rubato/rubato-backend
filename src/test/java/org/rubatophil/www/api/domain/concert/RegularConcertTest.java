@@ -19,10 +19,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
@@ -118,11 +115,11 @@ public class RegularConcertTest {
         //when
         this.regularConcert.addRegularConcertPiece(firstConcertPiece);
 
-        List<RegularConcertPiece> testRegularConcertPieceList = new ArrayList<>();
-        testRegularConcertPieceList.add(firstConcertPiece);
-
         //then
         RegularConcert emfindRegularConcert = em.find(RegularConcert.class, regularConcert.getId());
+
         assertEquals(this.regularConcert.getRegularConcertPieces().get(0), emfindRegularConcert.getRegularConcertPieces().get(0));
+        assertEquals(firstConcertPiece.getRegularConcert(), emfindRegularConcert);
+
     }
 }
