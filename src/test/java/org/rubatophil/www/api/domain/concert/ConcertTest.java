@@ -84,7 +84,9 @@ public class ConcertTest {
         //given
         //when
         //then
-        assertEquals(this.regularConcert.getApplyStatus(), ApplyStatus.CLOSED);
+        RegularConcert emfindRegularConcert = em.find(RegularConcert.class, this.regularConcert.getId());
+
+        assertEquals(emfindRegularConcert.getApplyStatus(), ApplyStatus.CLOSED);
     }
 
     @Test
