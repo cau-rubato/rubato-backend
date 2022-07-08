@@ -8,7 +8,6 @@ import org.rubatophil.www.api.domain.Account;
 import org.rubatophil.www.api.domain.Department;
 import org.rubatophil.www.api.domain.mapping.ConcertPamphlet;
 import org.rubatophil.www.api.domain.mapping.concertMember.ClubConcertMember;
-import org.rubatophil.www.api.domain.mapping.concertMember.ConcertMember;
 import org.rubatophil.www.api.domain.mapping.concertMember.GuestConcertMember;
 import org.rubatophil.www.api.domain.member.ClubMember;
 import org.rubatophil.www.api.domain.member.GuestMember;
@@ -21,10 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
