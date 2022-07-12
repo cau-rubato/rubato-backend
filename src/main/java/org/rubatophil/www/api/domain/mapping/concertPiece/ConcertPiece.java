@@ -33,7 +33,4 @@ public abstract class ConcertPiece {
     @Setter(AccessLevel.NONE)
     private LocalDateTime createdAt;
 
-    public ConcertPiece(Piece piece) {
-        this.piece = piece;
-    }
 }

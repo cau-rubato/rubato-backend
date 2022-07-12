@@ -104,13 +104,11 @@ public class RegularConcertTest {
 
         Piece firstPiece = Piece.builder()
                 .name("first piece name")
-                .composer(firstPieceComposer)
                 .build();
 
         em.persist(firstPiece);
 
         RegularConcertPiece firstConcertPiece = RegularConcertPiece.builder()
-                .piece(firstPiece)
                 .section(RegularConcertSection.FIRST)
                 .build();
 

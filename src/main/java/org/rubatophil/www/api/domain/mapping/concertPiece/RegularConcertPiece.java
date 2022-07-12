@@ -16,7 +16,6 @@ public class RegularConcertPiece extends ConcertPiece {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "concert_id")
-    @NotNull
     private RegularConcert regularConcert;
 
     @Enumerated(EnumType.STRING)
@@ -24,8 +23,7 @@ public class RegularConcertPiece extends ConcertPiece {
     private RegularConcertSection section;
 
     @Builder
-    public RegularConcertPiece(Piece piece, RegularConcertSection section) {
-        super(piece);
+    public RegularConcertPiece(RegularConcertSection section) {
         this.section = section;
     }
 }

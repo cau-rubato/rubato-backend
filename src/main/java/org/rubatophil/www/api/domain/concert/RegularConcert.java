@@ -34,9 +34,10 @@ public class RegularConcert extends Concert {
     }
 
     @Builder
-    public RegularConcert(String name, LocalDateTime date, Location location, String posterUrl, List<ConcertMember> concertMembers, List<ConcertPamphlet> concertPamphlets, List<ConcertPiece> concertPieces, Integer episode) {
+    public RegularConcert(String name, LocalDateTime date, Location location, String posterUrl, Integer episode, Integer fee) {
         super(name, date, location, posterUrl);
         this.episode = episode;
+        this.fee = fee;
     }
 
     public void PrePersist() {

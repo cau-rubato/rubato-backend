@@ -27,7 +27,6 @@ public class Piece {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "composer_id")
-    @NotNull
     private Composer composer;
 
     @OneToMany(mappedBy = "piece", cascade = CascadeType.ALL)
@@ -41,8 +40,12 @@ public class Piece {
     private LocalDateTime createdAt;
 
     @Builder
-    public Piece(String name, Composer composer) {
+    public Piece(String name) {
         this.name = name;
-        this.composer = composer;
+    }
+
+    public void addConcertPiece(ConcertPiece concertPiece) {
+        this.concertPieces.add(concertPiece);
+        concertPiece.setPiece(this);
     }
 }
