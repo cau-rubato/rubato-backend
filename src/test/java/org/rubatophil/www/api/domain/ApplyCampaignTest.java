@@ -42,7 +42,7 @@ class ApplyCampaignTest {
     }
 
     @Test
-    @DisplayName("Apply Campaign Table의 status field PrePersiste가 잘 적용되는지 테스트")
+    @DisplayName("Apply Campaign Table의 status field PrePersist가 잘 적용되는지 테스트")
     public void statusPrePersistTest() throws Exception {
 
         //given
