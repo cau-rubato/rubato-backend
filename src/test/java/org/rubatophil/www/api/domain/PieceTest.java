@@ -33,6 +33,7 @@ class PieceTest {
     Piece piece;
     RegularConcert regularConcert;
     RegularConcertPiece regularConcertPiece;
+    
     @BeforeEach
     void setUp() {
         piece = Piece.builder()
