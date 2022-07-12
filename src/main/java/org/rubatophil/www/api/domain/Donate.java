@@ -7,8 +7,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,12 +24,11 @@ public class Donate {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    @NotNull
     private Member member;
 
     @OneToMany(mappedBy = "donate", cascade = CascadeType.ALL)
     @Setter(AccessLevel.NONE)
-    private List<DonateBudget> donateBudgets;
+    private List<DonateBudget> donateBudgets = new ArrayList<>();
 
     private String message;
 
@@ -41,8 +40,7 @@ public class Donate {
     private LocalDateTime createdAt;
 
     @Builder
-    public Donate(Member member, String message) {
-        this.member = member;
+    public Donate(String message) {
         this.message = message;
     }
 
