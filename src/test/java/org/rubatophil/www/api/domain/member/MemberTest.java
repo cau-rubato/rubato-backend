@@ -33,18 +33,11 @@ public class MemberTest {
     @PersistenceContext
     private EntityManager em;
 
-    Account account;
     Address address;
-    Department swDepartment;
     ClubMember clubMember;
 
     @BeforeEach
     void setUp() {
-        this.account = Account.builder()
-                .loginId("test_id")
-                .loginPw("test_pw")
-                .build();
-
         this.address = Address.builder()
                 .zipcode("00000")
                 .state("서울특별시")
@@ -53,24 +46,15 @@ public class MemberTest {
                 .fullAddress("서울특별시 동작구 흑석로 84 중앙대학교 서울캠퍼스 학생회관 607호")
                 .build();
 
-        this.swDepartment = Department.builder()
-                .college("창의ICT공과대학")
-                .school("소프트웨어학부")
-                .build();
-
         this.clubMember = ClubMember.builder()
-                .account(this.account)
                 .name("test club member name")
                 .birth(LocalDate.of(1999, 01, 01))
                 .phoneNumber("01000000000")
                 .address(this.address)
                 .generation(34)
-                .department(swDepartment)
                 .studentId("20180000")
                 .build();
 
-        em.persist(this.account);
-        em.persist(this.swDepartment);
         em.persist(this.clubMember);
     }
 
@@ -111,13 +95,6 @@ public class MemberTest {
     public void addOneClubConcertMemberTest() throws Exception {
 
         //given
-        Department swDepartment = Department.builder()
-                .college("창의ICT공과대학")
-                .school("소프트웨어학부")
-                .build();
-
-        em.persist(swDepartment);
-
         ClubConcertMember clubConcertMember = ClubConcertMember.builder()
                 .instrument(Instrument.VIOLIN)
                 .concertRole(ConcertRole.GENERAL)
@@ -133,7 +110,7 @@ public class MemberTest {
         ClubConcertMember emfindClubConcertMember = em.find(ClubConcertMember.class, clubConcertMember.getId());
 
         assertEquals(this.clubMember.getMembers().get(0), emfindClubMember.getMembers().get(0));
-        assertEquals(emfindClubConcertMember.getMember(), emfindClubMember);
+        assertEquals(emfindClubMember, emfindClubConcertMember.getMember());
     }
 
     @Test
@@ -142,7 +119,6 @@ public class MemberTest {
 
         //given
         GuestMember guestMember = GuestMember.builder()
-                .account(this.account)
                 .name("test guest name")
                 .birth(LocalDate.of(1999, 01, 01))
                 .phoneNumber("01000000000")
@@ -168,6 +144,6 @@ public class MemberTest {
         GuestConcertMember emfindGuestConcertMember = em.find(GuestConcertMember.class, guestConcertMember.getId());
 
         assertEquals(guestMember.getMembers().get(0), emfindGuestMember.getMembers().get(0));
-        assertEquals(emfindGuestConcertMember.getMember(), emfindGuestMember);
+        assertEquals(emfindGuestMember, emfindGuestConcertMember.getMember());
     }
 }

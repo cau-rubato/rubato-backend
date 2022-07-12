@@ -54,7 +54,7 @@ public class Manager {
         this.status = status;
     }
 
-    public void addClubMember(ClubMember clubMember) {
+    public void setClubMember(ClubMember clubMember) {
         this.clubMember = clubMember;
         clubMember.setManager(this);
     }

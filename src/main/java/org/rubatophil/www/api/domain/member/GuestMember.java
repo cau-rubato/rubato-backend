@@ -1,7 +1,6 @@
 package org.rubatophil.www.api.domain.member;
 
 import lombok.*;
-import org.rubatophil.www.api.domain.Account;
 import org.rubatophil.www.api.domain.mapping.MemberInstrument;
 import org.rubatophil.www.api.domain.type.Address;
 
@@ -21,8 +20,8 @@ public class GuestMember extends Member {
     private List<MemberInstrument> memberInstruments = new ArrayList<>();
 
     @Builder
-    public GuestMember(Account account, String name, LocalDate birth, String phoneNumber, Address address, List<MemberInstrument> memberInstruments) {
-        super(account, name, birth, phoneNumber, address);
+    public GuestMember(String name, LocalDate birth, String phoneNumber, Address address) {
+        super(name, birth, phoneNumber, address);
     }
 
     public void addMemberInstrument(MemberInstrument memberInstrument) {

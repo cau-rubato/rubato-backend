@@ -67,7 +67,7 @@ public class ManagerTest {
 
     @Test
     @DisplayName("Manager Table에 한 개의 Club Member가 잘 들어가고 조회되는지 테스트")
-    public void addOneClubMemberTest() throws Exception {
+    public void setOneClubMemberTest() throws Exception {
 
         //given
         Account account = Account.builder()
@@ -85,28 +85,19 @@ public class ManagerTest {
                 .fullAddress("서울특별시 동작구 흑석로 84 중앙대학교 서울캠퍼스 학생회관 607호")
                 .build();
 
-        Department department = Department.builder()
-                .college("창의ICT공과대학")
-                .school("소프트웨어학부")
-                .build();
-
-        em.persist(department);
-
         ClubMember clubMember = ClubMember.builder()
-                .account(account)
                 .name("test club member name")
                 .birth(LocalDate.of(1999, 01, 01))
                 .phoneNumber("01000000000")
                 .address(address)
                 .generation(34)
-                .department(department)
                 .studentId("20180000")
                 .build();
 
         em.persist(clubMember);
 
         //when
-        this.manager.addClubMember(clubMember);
+        this.manager.setClubMember(clubMember);
 
         //then
         Manager emfindManager = em.find(Manager.class, this.manager.getId());

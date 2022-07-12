@@ -77,7 +77,6 @@ public class DepartmentTest {
 
         //given
         Applicant applicant = Applicant.builder()
-                .account(account)
                 .name("test applicant name")
                 .birth(LocalDate.of(1999, 01, 01))
                 .phoneNumber("01000000000")
@@ -104,7 +103,6 @@ public class DepartmentTest {
 
         //given
         ClubMember clubMember = ClubMember.builder()
-                .account(this.account)
                 .name("test club member name")
                 .birth(LocalDate.of(1999, 01, 01))
                 .phoneNumber("01000000000")

@@ -32,7 +32,6 @@ public class ApplicantTest {
 
     Account account;
     Address address;
-    Department swDepartment;
     Applicant applicant;
 
     @BeforeEach
@@ -50,23 +49,15 @@ public class ApplicantTest {
                 .fullAddress("서울특별시 동작구 흑석로 84 중앙대학교 서울캠퍼스 학생회관 607호")
                 .build();
 
-        this.swDepartment= Department.builder()
-                .college("창의ICT공과대학")
-                .school("소프트웨어학부")
-                .build();
-
         this.applicant = Applicant.builder()
-                .account(this.account)
                 .name("test applicant name")
                 .birth(LocalDate.of(1999, 01, 01))
                 .phoneNumber("01000000000")
                 .address(this.address)
-                .department(this.swDepartment)
                 .studentId("20180000")
                 .build();
 
         em.persist(this.account);
-        em.persist(this.swDepartment);
         em.persist(this.applicant);
     }
 
@@ -79,12 +70,10 @@ public class ApplicantTest {
         //then
         Applicant emfindApplicant = em.find(Applicant.class, this.applicant.getId());
 
-        assertEquals(emfindApplicant.getAccount(), this.account);
         assertEquals(emfindApplicant.getName(), "test applicant name");
         assertEquals(emfindApplicant.getBirth(), LocalDate.of(1999, 01, 01));
         assertEquals(emfindApplicant.getPhoneNumber(), "01000000000");
         assertEquals(emfindApplicant.getAddress(), this.address);
-        assertEquals(emfindApplicant.getDepartment(), this.swDepartment);
         assertEquals(emfindApplicant.getStudentId(), "20180000");
     }
 
@@ -112,6 +101,6 @@ public class ApplicantTest {
         ApplicantExperience emfindApplicantExperience = em.find(ApplicantExperience.class, applicantExperience.getId());
 
         assertEquals(this.applicant.getApplicantExperiences().get(0), emfindApplicant.getApplicantExperiences().get(0));
-        assertEquals(emfindApplicantExperience.getApplicant(), emfindApplicant);
+        assertEquals(emfindApplicant, emfindApplicantExperience.getApplicant());
     }
 }

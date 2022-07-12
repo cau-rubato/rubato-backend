@@ -29,18 +29,11 @@ public class ClubMemberTest {
     @PersistenceContext
     private EntityManager em;
 
-    Account account;
     Address address;
-    Department swDepartment;
     ClubMember clubMember;
 
     @BeforeEach
     void setUp() {
-        this.account = Account.builder()
-                .loginId("test_id")
-                .loginPw("test_pw")
-                .build();
-
         this.address = Address.builder()
                 .zipcode("00000")
                 .state("서울특별시")
@@ -49,24 +42,15 @@ public class ClubMemberTest {
                 .fullAddress("서울특별시 동작구 흑석로 84 중앙대학교 서울캠퍼스 학생회관 607호")
                 .build();
 
-        this.swDepartment= Department.builder()
-                .college("창의ICT공과대학")
-                .school("소프트웨어학부")
-                .build();
-
         this.clubMember = ClubMember.builder()
-                .account(this.account)
                 .name("test club member name")
                 .birth(LocalDate.of(1999, 01, 01))
                 .phoneNumber("01000000000")
                 .address(this.address)
                 .generation(34)
-                .department(this.swDepartment)
                 .studentId("20180000")
                 .build();
 
-        em.persist(this.account);
-        em.persist(this.swDepartment);
         em.persist(this.clubMember);
     }
 
@@ -79,13 +63,11 @@ public class ClubMemberTest {
         //then
         ClubMember emfindClubMember = em.find(ClubMember.class, this.clubMember.getId());
 
-        assertEquals(emfindClubMember.getAccount(), this.account);
         assertEquals(emfindClubMember.getName(), "test club member name");
         assertEquals(emfindClubMember.getBirth(), LocalDate.of(1999, 01, 01));
         assertEquals(emfindClubMember.getPhoneNumber(), "01000000000");
         assertEquals(emfindClubMember.getAddress(), this.address);
         assertEquals(emfindClubMember.getGeneration(), 34);
-        assertEquals(emfindClubMember.getDepartment(), this.swDepartment);
         assertEquals(emfindClubMember.getStudentId(), "20180000");
     }
 
@@ -108,6 +90,6 @@ public class ClubMemberTest {
         MemberInstrument emfindMemberInstrument = em.find(MemberInstrument.class, memberInstrument.getId());
 
         assertEquals(this.clubMember.getMemberInstruments().get(0), emfindClubMember.getMemberInstruments().get(0));
-        assertEquals(emfindMemberInstrument.getMember(), emfindClubMember);
+        assertEquals(emfindClubMember, emfindMemberInstrument.getMember());
     }
 }

@@ -32,7 +32,6 @@ public abstract class Member {
     private Long id;
 
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
-    @Setter(AccessLevel.NONE)
     private Account account;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
@@ -62,8 +61,7 @@ public abstract class Member {
     @Setter(AccessLevel.NONE)
     private LocalDateTime createdAt;
 
-    public Member(Account account, String name, LocalDate birth, String phoneNumber, Address address) {
-        this.account = account;
+    public Member(String name, LocalDate birth, String phoneNumber, Address address) {
         this.name = name;
         this.birth = birth;
         this.phoneNumber = phoneNumber;

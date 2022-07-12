@@ -48,7 +48,6 @@ public class GuestMemberTest {
                 .build();
 
         this.guestMember = GuestMember.builder()
-                .account(this.account)
                 .name("test guest member name")
                 .birth(LocalDate.of(1999, 01, 01))
                 .phoneNumber("01000000000")
@@ -68,7 +67,6 @@ public class GuestMemberTest {
         //then
         GuestMember emfindGuestMember = em.find(GuestMember.class, this.guestMember.getId());
 
-        assertEquals(emfindGuestMember.getAccount(), this.account);
         assertEquals(emfindGuestMember.getName(), "test guest member name");
         assertEquals(emfindGuestMember.getBirth(), LocalDate.of(1999, 01, 01));
         assertEquals(emfindGuestMember.getPhoneNumber(), "01000000000");

@@ -1,7 +1,6 @@
 package org.rubatophil.www.api.domain.member;
 
 import lombok.*;
-import org.rubatophil.www.api.domain.Account;
 import org.rubatophil.www.api.domain.type.Address;
 
 import javax.persistence.DiscriminatorValue;
@@ -15,7 +14,7 @@ import java.time.LocalDate;
 public class Sponsor extends Member {
 
     @Builder
-    public Sponsor(Account account, String name, LocalDate birth, String phoneNumber, Address address) {
-        super(account, name, birth, phoneNumber, address);
+    public Sponsor(String name, LocalDate birth, String phoneNumber, Address address) {
+        super(name, birth, phoneNumber, address);
     }
 }

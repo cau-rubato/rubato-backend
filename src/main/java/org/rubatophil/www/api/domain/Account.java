@@ -23,6 +23,7 @@ public class Account {
 
     @OneToOne
     @JoinColumn(name = "member_id")
+    @Setter(AccessLevel.NONE)
     private Member member;
 
     @NotNull
@@ -44,6 +45,11 @@ public class Account {
     public Account(String loginId, String loginPw) {
         this.loginId = loginId;
         this.loginPw = loginPw;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+        member.setAccount(this);
     }
 
     @PrePersist

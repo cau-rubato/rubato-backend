@@ -36,7 +36,6 @@ public class ConcertTest {
     Location concertHallLocation;
     RegularConcert regularConcert;
     Account account;
-    Department swDepartment;
 
     @BeforeEach
     void setUp() {
@@ -61,20 +60,8 @@ public class ConcertTest {
                 .episode(0)
                 .build();
 
-        this.account = Account.builder()
-                .loginId("test_id")
-                .loginPw("test_pw")
-                .build();
-
-        this.swDepartment = Department.builder()
-                .college("창의ICT공과대학")
-                .school("소프트웨어학부")
-                .build();
-
         em.persist(this.concertHallLocation);
         em.persist(this.regularConcert);
-        em.persist(this.account);
-        em.persist(this.swDepartment);
     }
 
     @Test
@@ -95,13 +82,11 @@ public class ConcertTest {
 
         //given
         ClubMember clubMember = ClubMember.builder()
-                .account(this.account)
                 .name("test member name")
                 .birth(LocalDate.of(1999, 01, 01))
                 .phoneNumber("01000000000")
                 .address(this.concertHallAddress)
                 .generation(34)
-                .department(swDepartment)
                 .studentId("20180000")
                 .build();
 
@@ -131,7 +116,6 @@ public class ConcertTest {
 
         //given
         GuestMember guestMember = GuestMember.builder()
-                .account(this.account)
                 .name("test guest name")
                 .birth(LocalDate.of(1999, 01, 01))
                 .phoneNumber("01000000000")

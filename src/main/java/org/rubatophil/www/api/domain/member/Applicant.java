@@ -1,7 +1,6 @@
 package org.rubatophil.www.api.domain.member;
 
 import lombok.*;
-import org.rubatophil.www.api.domain.Account;
 import org.rubatophil.www.api.domain.Apply;
 import org.rubatophil.www.api.domain.Department;
 import org.rubatophil.www.api.domain.mapping.ApplicantExperience;
@@ -21,14 +20,12 @@ public class Applicant extends Member {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
-    @NotNull
     private Department department;
 
     @NotNull
     private String studentId;
 
     @OneToOne(mappedBy = "applicant", cascade = CascadeType.ALL)
-    @Setter(AccessLevel.NONE)
     private Apply apply;
 
     @OneToMany(mappedBy = "applicant")
@@ -36,9 +33,8 @@ public class Applicant extends Member {
     private List<ApplicantExperience> applicantExperiences = new ArrayList<>();
 
     @Builder
-    public Applicant(Account account, String name, LocalDate birth, String phoneNumber, Address address, Department department, String studentId) {
-        super(account, name, birth, phoneNumber, address);
-        this.department = department;
+    public Applicant(String name, LocalDate birth, String phoneNumber, Address address, String studentId) {
+        super(name, birth, phoneNumber, address);
         this.studentId = studentId;
     }
 
