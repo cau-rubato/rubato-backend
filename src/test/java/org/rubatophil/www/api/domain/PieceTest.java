@@ -1,5 +1,6 @@
 package org.rubatophil.www.api.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,17 +30,36 @@ class PieceTest {
     @PersistenceContext
     EntityManager em;
 
+    Piece piece;
+    RegularConcert regularConcert;
+    RegularConcertPiece regularConcertPiece;
+    @BeforeEach
+    void setUp() {
+        piece = Piece.builder()
+                .name("Symphony No.9")
+                .build();
+
+        regularConcert = RegularConcert.builder()
+                .episode(58)
+                .name("Resurrection")
+                .build();
+
+        regularConcertPiece = RegularConcertPiece.builder()
+                .section(RegularConcertSection.FIRST)
+                .build();
+
+        em.persist(piece);
+        em.persist(regularConcert);
+        em.persist(regularConcertPiece);
+    }
+
     @Test
     @DisplayName("Builder로 Piece가 잘 생성되고 persist 시 올바른 값이 저장되는지 테스트")
     public void builderTest() throws Exception {
         //given
-        Piece piece = Piece.builder().name("Symphony No.9").build();
-        em.persist(piece);
-
-        Long pieceId = piece.getId();
 
         //when
-        Piece findPiece = em.find(Piece.class, pieceId);
+        Piece findPiece = em.find(Piece.class, piece.getId());
 
         //then
         assertEquals("Symphony No.9", findPiece.getName());
@@ -49,23 +69,8 @@ class PieceTest {
     @DisplayName("addConcertPiece로 매핑 테이블과 연관관계가 잘 잡히는지 테스트")
     public void addConcertPieceTest() throws Exception {
         //given
-        Piece piece = Piece.builder().name("Symphony No.8").build();
-
-        RegularConcert regularConcert = RegularConcert.builder()
-                .episode(58)
-                .name("Resurrection")
-                .build();
-
-        RegularConcertPiece regularConcertPiece = RegularConcertPiece.builder()
-                .section(RegularConcertSection.FIRST)
-                .build();
-
         piece.addConcertPiece(regularConcertPiece);
         regularConcert.addRegularConcertPiece(regularConcertPiece);
-
-        em.persist(piece);
-        em.persist(regularConcert);
-        em.persist(regularConcertPiece);
 
         //when
         Piece findPiece = em.find(Piece.class, piece.getId());

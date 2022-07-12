@@ -30,7 +30,6 @@ public class Composer {
     @LastModifiedDate
     @Setter(AccessLevel.NONE)
     private LocalDateTime modifiedAt;
-
     @CreatedDate
     @Setter(AccessLevel.NONE)
     private LocalDateTime createdAt;

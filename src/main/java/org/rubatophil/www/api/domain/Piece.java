@@ -27,7 +27,6 @@ public class Piece {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "composer_id")
-    @NotNull
     private Composer composer;
 
     @OneToMany(mappedBy = "piece", cascade = CascadeType.ALL)
@@ -36,7 +35,6 @@ public class Piece {
     @LastModifiedDate
     @Setter(AccessLevel.NONE)
     private LocalDateTime modifiedAt;
-
     @CreatedDate
     @Setter(AccessLevel.NONE)
     private LocalDateTime createdAt;

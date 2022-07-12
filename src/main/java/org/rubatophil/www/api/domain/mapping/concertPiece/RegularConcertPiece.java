@@ -16,7 +16,6 @@ public class RegularConcertPiece extends ConcertPiece {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "concert_id")
-    @NotNull
     private RegularConcert regularConcert;
 
     @Enumerated(EnumType.STRING)
