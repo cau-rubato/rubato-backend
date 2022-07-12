@@ -4,8 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.rubatophil.www.api.domain.Account;
-import org.rubatophil.www.api.domain.Department;
 import org.rubatophil.www.api.domain.mapping.MemberInstrument;
 import org.rubatophil.www.api.domain.type.Address;
 import org.rubatophil.www.api.domain.type.Instrument;

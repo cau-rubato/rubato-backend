@@ -4,8 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.rubatophil.www.api.domain.Account;
-import org.rubatophil.www.api.domain.Department;
 import org.rubatophil.www.api.domain.Donate;
 import org.rubatophil.www.api.domain.mapping.concertMember.ClubConcertMember;
 import org.rubatophil.www.api.domain.mapping.concertMember.GuestConcertMember;
@@ -87,7 +85,7 @@ public class MemberTest {
         Donate emfindDonate = em.find(Donate.class, donate.getId());
 
         assertEquals(this.clubMember.getDonates().get(0), emfindClubMember.getDonates().get(0));
-        assertEquals(emfindDonate.getMember(), emfindClubMember);
+        assertEquals(emfindClubMember, emfindDonate.getMember());
     }
 
     @Test

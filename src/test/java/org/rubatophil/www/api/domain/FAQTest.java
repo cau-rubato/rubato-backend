@@ -10,7 +10,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.validation.ConstraintViolationException;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -92,6 +92,6 @@ public class GuestMemberTest {
         MemberInstrument emfindMemberInstrument = em.find(MemberInstrument.class, memberInstrument.getId());
 
         assertEquals(this.guestMember.getMemberInstruments().get(0), emfindGuestMember.getMemberInstruments().get(0));
-        assertEquals(emfindMemberInstrument.getMember(), emfindGuestMember);
+        assertEquals(emfindGuestMember, emfindMemberInstrument.getMember());
     }
 }
