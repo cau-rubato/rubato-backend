@@ -64,9 +64,9 @@ public class SponsorTest {
         //then
         Sponsor emfindSponsor = em.find(Sponsor.class, this.sponsor.getId());
 
-        assertEquals(emfindSponsor.getName(), "test sponsor name");
-        assertEquals(emfindSponsor.getBirth(), LocalDate.of(1999, 01, 01));
-        assertEquals(emfindSponsor.getPhoneNumber(), "01000000000");
-        assertEquals(emfindSponsor.getAddress(), this.address);
+        assertEquals("test sponsor name", emfindSponsor.getName());
+        assertEquals(LocalDate.of(1999, 01, 01), emfindSponsor.getBirth());
+        assertEquals("01000000000", emfindSponsor.getPhoneNumber());
+        assertEquals(this.address, emfindSponsor.getAddress());
     }
 }

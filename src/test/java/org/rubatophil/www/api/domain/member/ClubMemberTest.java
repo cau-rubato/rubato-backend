@@ -61,12 +61,12 @@ public class ClubMemberTest {
         //then
         ClubMember emfindClubMember = em.find(ClubMember.class, this.clubMember.getId());
 
-        assertEquals(emfindClubMember.getName(), "test club member name");
-        assertEquals(emfindClubMember.getBirth(), LocalDate.of(1999, 01, 01));
-        assertEquals(emfindClubMember.getPhoneNumber(), "01000000000");
-        assertEquals(emfindClubMember.getAddress(), this.address);
-        assertEquals(emfindClubMember.getGeneration(), 34);
-        assertEquals(emfindClubMember.getStudentId(), "20180000");
+        assertEquals("test club member name", emfindClubMember.getName());
+        assertEquals(LocalDate.of(1999, 01, 01), emfindClubMember.getBirth());
+        assertEquals("01000000000", emfindClubMember.getPhoneNumber());
+        assertEquals(this.address, emfindClubMember.getAddress());
+        assertEquals(34, emfindClubMember.getGeneration());
+        assertEquals("20180000", emfindClubMember.getStudentId());
     }
 
     @Test

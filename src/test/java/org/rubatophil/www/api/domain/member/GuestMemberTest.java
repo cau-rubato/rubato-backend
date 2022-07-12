@@ -67,10 +67,10 @@ public class GuestMemberTest {
         //then
         GuestMember emfindGuestMember = em.find(GuestMember.class, this.guestMember.getId());
 
-        assertEquals(emfindGuestMember.getName(), "test guest member name");
-        assertEquals(emfindGuestMember.getBirth(), LocalDate.of(1999, 01, 01));
-        assertEquals(emfindGuestMember.getPhoneNumber(), "01000000000");
-        assertEquals(emfindGuestMember.getAddress(), this.address);
+        assertEquals("test guest member name", emfindGuestMember.getName());
+        assertEquals(LocalDate.of(1999, 01, 01), emfindGuestMember.getBirth());
+        assertEquals("01000000000", emfindGuestMember.getPhoneNumber());
+        assertEquals(this.address, emfindGuestMember.getAddress());
     }
 
     @Test

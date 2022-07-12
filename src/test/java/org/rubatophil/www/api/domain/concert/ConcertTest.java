@@ -35,7 +35,6 @@ public class ConcertTest {
     Address concertHallAddress;
     Location concertHallLocation;
     RegularConcert regularConcert;
-    Account account;
 
     @BeforeEach
     void setUp() {
@@ -73,7 +72,7 @@ public class ConcertTest {
         //then
         RegularConcert emfindRegularConcert = em.find(RegularConcert.class, this.regularConcert.getId());
 
-        assertEquals(emfindRegularConcert.getApplyStatus(), ApplyStatus.CLOSED);
+        assertEquals(ApplyStatus.CLOSED, emfindRegularConcert.getApplyStatus());
     }
 
     @Test
@@ -107,7 +106,7 @@ public class ConcertTest {
         ClubConcertMember emfindClubConcertMember = em.find(ClubConcertMember.class, clubConcertMember.getId());
 
         assertEquals(this.regularConcert.getConcertMembers().get(0), emfindRegularConcert.getConcertMembers().get(0));
-        assertEquals(emfindClubConcertMember.getConcert(), emfindRegularConcert);
+        assertEquals(emfindRegularConcert, emfindClubConcertMember.getConcert());
     }
 
     @Test
@@ -142,7 +141,7 @@ public class ConcertTest {
 
 
         assertEquals(this.regularConcert.getConcertMembers().get(0), emfindRegularConcert.getConcertMembers().get(0));
-        assertEquals(emfindGuestConcertMember.getConcert(), emfindRegularConcert);
+        assertEquals(emfindRegularConcert, emfindGuestConcertMember.getConcert());
     }
 
     @Test
@@ -165,6 +164,6 @@ public class ConcertTest {
         ConcertPamphlet emfindConcertPamphlet = em.find(ConcertPamphlet.class, firstConcertPamphlet.getId());
 
         assertEquals(this.regularConcert.getConcertPamphlets().get(0), emfindRegularConcert.getConcertPamphlets().get(0));
-        assertEquals(emfindConcertPamphlet.getConcert(), emfindRegularConcert);
+        assertEquals(emfindRegularConcert, emfindConcertPamphlet.getConcert());
     }
 }

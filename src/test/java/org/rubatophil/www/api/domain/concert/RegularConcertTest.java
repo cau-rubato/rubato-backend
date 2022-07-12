@@ -71,8 +71,8 @@ public class RegularConcertTest {
         //then
         RegularConcert emfindRegularConcert = em.find(RegularConcert.class, this.regularConcert.getId());
 
-        assertEquals(emfindRegularConcert.getApplyStatus(), ApplyStatus.CLOSED);
-        assertEquals(emfindRegularConcert.getFee(), 0);
+        assertEquals(ApplyStatus.CLOSED, emfindRegularConcert.getApplyStatus());
+        assertEquals(0, emfindRegularConcert.getFee());
     }
 
     @Test
@@ -84,11 +84,11 @@ public class RegularConcertTest {
         //then
         RegularConcert emfindRegularConcert = em.find(RegularConcert.class, this.regularConcert.getId());
 
-        assertEquals(emfindRegularConcert.getName(), "test regular concert");
-        assertEquals(emfindRegularConcert.getDate(), LocalDateTime.of(2022, 07, 07, 20, 0, 0, 0));
-        assertEquals(emfindRegularConcert.getLocation(), concertHallLocation);
-        assertEquals(emfindRegularConcert.getPosterUrl(), "www.poster.com");
-        assertEquals(emfindRegularConcert.getEpisode(), 0);
+        assertEquals("test regular concert", emfindRegularConcert.getName());
+        assertEquals(LocalDateTime.of(2022, 07, 07, 20, 0, 0, 0), emfindRegularConcert.getDate());
+        assertEquals(concertHallLocation, emfindRegularConcert.getLocation());
+        assertEquals("www.poster.com", emfindRegularConcert.getPosterUrl());
+        assertEquals(0, emfindRegularConcert.getEpisode());
     }
 
     @Test
@@ -124,7 +124,7 @@ public class RegularConcertTest {
         RegularConcertPiece emfindRegularConcertPiece = em.find(RegularConcertPiece.class, firstConcertPiece.getId());
 
         assertEquals(this.regularConcert.getRegularConcertPieces().get(0), emfindRegularConcert.getRegularConcertPieces().get(0));
-        assertEquals(emfindRegularConcertPiece.getRegularConcert(), emfindRegularConcert);
+        assertEquals(emfindRegularConcert, emfindRegularConcertPiece.getRegularConcert());
 
     }
 }

@@ -63,7 +63,7 @@ public class MemberTest {
         //given
         //when
         //then
-        assertEquals(this.clubMember.getProfileImage(), "www.default.com");
+        assertEquals("www.default.com", this.clubMember.getProfileImage());
     }
 
     @Test

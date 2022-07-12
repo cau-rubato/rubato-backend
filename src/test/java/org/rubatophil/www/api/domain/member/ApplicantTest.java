@@ -69,11 +69,11 @@ public class ApplicantTest {
         //then
         Applicant emfindApplicant = em.find(Applicant.class, this.applicant.getId());
 
-        assertEquals(emfindApplicant.getName(), "test applicant name");
-        assertEquals(emfindApplicant.getBirth(), LocalDate.of(1999, 01, 01));
-        assertEquals(emfindApplicant.getPhoneNumber(), "01000000000");
-        assertEquals(emfindApplicant.getAddress(), this.address);
-        assertEquals(emfindApplicant.getStudentId(), "20180000");
+        assertEquals("test applicant name", emfindApplicant.getName());
+        assertEquals(LocalDate.of(1999, 01, 01), emfindApplicant.getBirth());
+        assertEquals("01000000000", emfindApplicant.getPhoneNumber());
+        assertEquals(this.address, emfindApplicant.getAddress());
+        assertEquals("20180000", emfindApplicant.getStudentId());
     }
 
     @Test

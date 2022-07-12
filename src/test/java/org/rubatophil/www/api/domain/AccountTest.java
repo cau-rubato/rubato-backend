@@ -60,7 +60,7 @@ public class AccountTest {
         //then
         Account emfindAccount = em.find(Account.class, this.account.getId());
 
-        assertEquals(emfindAccount.getStatus(), AccountStatus.ACTIVATED);
+        assertEquals(AccountStatus.ACTIVATED, emfindAccount.getStatus());
     }
 
     @Test
@@ -72,8 +72,8 @@ public class AccountTest {
         //then
         Account emfindAccount = em.find(Account.class, this.account.getId());
 
-        assertEquals(emfindAccount.getLoginId(), "test_id");
-        assertEquals(emfindAccount.getLoginPw(), "test_pw");
+        assertEquals("test_id", emfindAccount.getLoginId());
+        assertEquals("test_pw", emfindAccount.getLoginPw());
     }
 
     @Test
