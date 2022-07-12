@@ -42,9 +42,8 @@ public class Piece {
     private LocalDateTime createdAt;
 
     @Builder
-    public Piece(String name, Composer composer) {
+    public Piece(String name) {
         this.name = name;
-        this.composer = composer;
     }
 
     public void addConcertPiece(ConcertPiece concertPiece) {

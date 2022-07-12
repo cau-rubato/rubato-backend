@@ -29,7 +29,7 @@ class ComposerTest {
 
     @Test
     @DisplayName("Builder로 Composer가 잘 생성되고 persist 시 올바른 값이 저장되는지 테스트")
-    void builder() {
+    public void builderTest() throws Exception {
         //given
         Composer composer = Composer.builder().name("Beethoven").build();
 
@@ -44,7 +44,7 @@ class ComposerTest {
 
     @Test
     @DisplayName("addPiece 메소드가 잘 동작하고 저장이 잘 되는지 테스트")
-    void addPieceTest() {
+    public void addPieceTest() throws Exception {
         //given
         Composer composer = Composer.builder().name("Dvorak").build();
         Piece piece = Piece.builder().name("Symphony No.9").build();
@@ -56,8 +56,7 @@ class ComposerTest {
         Piece findPiece = em.find(Piece.class, piece.getId());
 
         //then
-        assertEquals("Dvorak", findComposer.getName());
-        assertEquals("Symphony No.9", findPiece.getName());
+        assertEquals("Symphony No.9", findComposer.getPieces().get(0).getName());
         assertEquals("Dvorak", findPiece.getComposer().getName());
     }
 

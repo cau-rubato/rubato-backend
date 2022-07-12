@@ -24,8 +24,7 @@ public class RegularConcertPiece extends ConcertPiece {
     private RegularConcertSection section;
 
     @Builder
-    public RegularConcertPiece(Piece piece, RegularConcertSection section) {
-        super(piece);
+    public RegularConcertPiece(RegularConcertSection section) {
         this.section = section;
     }
 }
