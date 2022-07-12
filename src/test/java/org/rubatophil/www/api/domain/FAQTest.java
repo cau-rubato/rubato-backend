@@ -10,7 +10,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.validation.ConstraintViolationException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,8 +34,8 @@ class FAQTest {
         FAQ newFaq = em.find(FAQ.class, faqId);
 
         //then
-        assertEquals(faq.getQuestion(), "Q");
-        assertEquals(faq.getAnswer(), "A");
+        assertEquals("Q", faq.getQuestion());
+        assertEquals("A", faq.getAnswer());
         assertEquals(faq.getQuestion(), newFaq.getQuestion());
         assertEquals(faq.getAnswer(), newFaq.getAnswer());
     }

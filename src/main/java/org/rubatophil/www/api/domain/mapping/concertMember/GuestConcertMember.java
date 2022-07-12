@@ -17,9 +17,15 @@ import javax.persistence.Entity;
 public class GuestConcertMember extends ConcertMember {
 
     private Integer salary;
+
     @Builder
     public GuestConcertMember(Member member, Concert concert, Instrument instrument, Part part, ConcertRole concertRole, Integer salary) {
         super(member, concert, instrument, part, concertRole);
         this.salary = salary;
+    }
+
+    public void PrePersist() {
+        super.PrePersist();
+        this.salary = this.salary == null ? 0 : this.salary;
     }
 }

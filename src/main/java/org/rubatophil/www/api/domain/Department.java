@@ -2,10 +2,12 @@ package org.rubatophil.www.api.domain;
 
 import lombok.*;
 import org.rubatophil.www.api.domain.member.Applicant;
+import org.rubatophil.www.api.domain.member.ClubMember;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +24,14 @@ public class Department {
     private Long id;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    @Setter(AccessLevel.NONE)
     private List<Applicant> applicants = new ArrayList<>();
 
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    @Setter(AccessLevel.NONE)
+    private List<ClubMember> clubMembers = new ArrayList<>();
+
+    @NotNull
     private String college;
     private String school;
     private String department;
@@ -40,5 +48,15 @@ public class Department {
         this.college = college;
         this.school = school;
         this.department = department;
+    }
+
+    public void addApplicant(Applicant applicant) {
+        this.applicants.add(applicant);
+        applicant.setDepartment(this);
+    }
+
+    public void addClubMember(ClubMember clubMember) {
+        this.clubMembers.add(clubMember);
+        clubMember.setDepartment(this);
     }
 }

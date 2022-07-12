@@ -35,8 +35,6 @@ public class ConcertTest {
     Address concertHallAddress;
     Location concertHallLocation;
     RegularConcert regularConcert;
-    Account account;
-    Department swDepartment;
 
     @BeforeEach
     void setUp() {
@@ -61,20 +59,8 @@ public class ConcertTest {
                 .episode(0)
                 .build();
 
-        this.account = Account.builder()
-                .login_id("test_id")
-                .login_pw("test_pw")
-                .build();
-
-        this.swDepartment = Department.builder()
-                .college("창의ICT공과대학")
-                .school("소프트웨어학부")
-                .build();
-
         em.persist(this.concertHallLocation);
         em.persist(this.regularConcert);
-        em.persist(this.account);
-        em.persist(this.swDepartment);
     }
 
     @Test
@@ -86,7 +72,7 @@ public class ConcertTest {
         //then
         RegularConcert emfindRegularConcert = em.find(RegularConcert.class, this.regularConcert.getId());
 
-        assertEquals(emfindRegularConcert.getApplyStatus(), ApplyStatus.CLOSED);
+        assertEquals(ApplyStatus.CLOSED, emfindRegularConcert.getApplyStatus());
     }
 
     @Test
@@ -95,13 +81,11 @@ public class ConcertTest {
 
         //given
         ClubMember clubMember = ClubMember.builder()
-                .account(this.account)
                 .name("test member name")
                 .birth(LocalDate.of(1999, 01, 01))
                 .phoneNumber("01000000000")
                 .address(this.concertHallAddress)
                 .generation(34)
-                .department(swDepartment)
                 .studentId("20180000")
                 .build();
 
@@ -122,7 +106,7 @@ public class ConcertTest {
         ClubConcertMember emfindClubConcertMember = em.find(ClubConcertMember.class, clubConcertMember.getId());
 
         assertEquals(this.regularConcert.getConcertMembers().get(0), emfindRegularConcert.getConcertMembers().get(0));
-        assertEquals(emfindClubConcertMember.getConcert(), emfindRegularConcert);
+        assertEquals(emfindRegularConcert, emfindClubConcertMember.getConcert());
     }
 
     @Test
@@ -131,7 +115,6 @@ public class ConcertTest {
 
         //given
         GuestMember guestMember = GuestMember.builder()
-                .account(this.account)
                 .name("test guest name")
                 .birth(LocalDate.of(1999, 01, 01))
                 .phoneNumber("01000000000")
@@ -158,7 +141,7 @@ public class ConcertTest {
 
 
         assertEquals(this.regularConcert.getConcertMembers().get(0), emfindRegularConcert.getConcertMembers().get(0));
-        assertEquals(emfindGuestConcertMember.getConcert(), emfindRegularConcert);
+        assertEquals(emfindRegularConcert, emfindGuestConcertMember.getConcert());
     }
 
     @Test
@@ -181,6 +164,6 @@ public class ConcertTest {
         ConcertPamphlet emfindConcertPamphlet = em.find(ConcertPamphlet.class, firstConcertPamphlet.getId());
 
         assertEquals(this.regularConcert.getConcertPamphlets().get(0), emfindRegularConcert.getConcertPamphlets().get(0));
-        assertEquals(emfindConcertPamphlet.getConcert(), emfindRegularConcert);
+        assertEquals(emfindRegularConcert, emfindConcertPamphlet.getConcert());
     }
 }

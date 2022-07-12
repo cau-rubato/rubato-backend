@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,10 +23,13 @@ public class Account {
 
     @OneToOne
     @JoinColumn(name = "member_id")
+    @Setter(AccessLevel.NONE)
     private Member member;
 
-    private String login_id;
-    private String login_pw;
+    @NotNull
+    private String loginId;
+    @NotNull
+    private String loginPw;
 
     @Enumerated(EnumType.STRING)
     private AccountStatus status;
@@ -38,9 +42,14 @@ public class Account {
     private LocalDateTime createdAt;
 
     @Builder
-    public Account(String login_id, String login_pw) {
-        this.login_id = login_id;
-        this.login_pw = login_pw;
+    public Account(String loginId, String loginPw) {
+        this.loginId = loginId;
+        this.loginPw = loginPw;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+        member.setAccount(this);
     }
 
     @PrePersist
