@@ -114,7 +114,7 @@ public class MemberTest {
     }
 
     @Test
-    @DisplayName("Club Member Table에 한 개의 Guest Concert Member가 잘 들어가고 조회되는지 테스트")
+    @DisplayName("Guest Member Table에 한 개의 Guest Concert Member가 잘 들어가고 조회되는지 테스트")
     public void addOneGuestConcertMemberTest() throws Exception {
 
         //given
