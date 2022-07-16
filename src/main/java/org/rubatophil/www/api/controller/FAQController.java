@@ -19,7 +19,7 @@ public class FAQController {
 
     private final FAQService faqService;
 
-    @GetMapping("/faqs")
+    @GetMapping("v1/faqs")
     public List<FAQResponse> getFAQInfo() {
         List<FAQResponse> faqList = new ArrayList<>();
 
@@ -37,7 +37,7 @@ public class FAQController {
         return faqList;
     }
 
-    @PostMapping("/faqs")
+    @PostMapping("v1/faqs")
     public FAQResponse postFAQInfo(@RequestBody NewFAQ newFAQ) {
         FAQ faq = FAQ.builder()
                 .question(newFAQ.getQuestion())
