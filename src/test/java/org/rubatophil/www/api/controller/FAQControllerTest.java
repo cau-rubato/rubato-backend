@@ -83,4 +83,23 @@ class FAQControllerTest {
         //then
         mvcResult.andExpect(status().isOk());
     }
+
+    @Test
+    @DisplayName("[postFAQInfo] 하나의 request field가 null")
+    public void postFAQInfoNullTest() throws Exception {
+
+        //given
+        String url = "/v1/faqs";
+        String newFAQ = "{\"answer\":\"test answer\"}";
+
+        //when
+        ResultActions mvcResult = this.mockMvc.perform(post(url)
+                .content(newFAQ)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+        );
+
+        //then
+        mvcResult.andExpect(status().isBadRequest());
+    }
 }

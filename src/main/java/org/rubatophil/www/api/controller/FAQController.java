@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class FAQController {
     }
 
     @PostMapping("v1/faqs")
-    public void postFAQInfo(@RequestBody NewFAQ newFAQ) {
+    public void postFAQInfo(@Valid @RequestBody NewFAQ newFAQ) {
         FAQ faq = FAQ.builder()
                 .question(newFAQ.getQuestion())
                 .answer(newFAQ.getAnswer())
