@@ -45,6 +45,6 @@ public class FAQController {
                 .answer(newFAQ.getAnswer())
                 .build();
 
-        FAQ result = faqService.addNewFAQ(faq);
+        faqService.addNewFAQ(faq);
     }
 }

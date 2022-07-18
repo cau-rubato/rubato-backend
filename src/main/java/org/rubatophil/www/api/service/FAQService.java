@@ -17,9 +17,8 @@ public class FAQService {
         return faqRepository.findAll();
     }
 
-    public FAQ addNewFAQ(FAQ faq) {
+    public void addNewFAQ(FAQ faq) {
         faqRepository.save(faq);
-        return faqRepository.findById(faq.getId()).get();
     }
 
 }

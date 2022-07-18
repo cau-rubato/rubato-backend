@@ -54,12 +54,12 @@ class FAQControllerTest {
         this.faqs.add(this.faq);
 
         //when
-        when(faqService.getAllFAQs()).thenReturn(faqs);
+        when(this.faqService.getAllFAQs()).thenReturn(this.faqs);
 
         ResultActions mvcResult = this.mockMvc.perform(get(url));
 
         //then
-        assertEquals(this.faqs, faqService.getAllFAQs());
+        assertEquals(this.faqs, this.faqService.getAllFAQs());
 
         mvcResult.andExpect(status().isOk())
                 .andExpect(content().string(expectedJson));
