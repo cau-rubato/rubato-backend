@@ -38,20 +38,12 @@ public class FAQController {
     }
 
     @PostMapping("v1/faqs")
-    public FAQResponse postFAQInfo(@RequestBody NewFAQ newFAQ) {
+    public void postFAQInfo(@RequestBody NewFAQ newFAQ) {
         FAQ faq = FAQ.builder()
                 .question(newFAQ.getQuestion())
                 .answer(newFAQ.getAnswer())
                 .build();
 
         FAQ result = faqService.addNewFAQ(faq);
-
-        FAQResponse faqResponse = FAQResponse.builder()
-                .id(result.getId())
-                .question(result.getQuestion())
-                .answer(result.getAnswer())
-                .build();
-
-        return faqResponse;
     }
 }
