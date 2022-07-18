@@ -59,8 +59,6 @@ class FAQControllerTest {
         ResultActions mvcResult = this.mockMvc.perform(get(url));
 
         //then
-        assertEquals(this.faqs, this.faqService.getAllFAQs());
-
         mvcResult.andExpect(status().isOk())
                 .andExpect(content().string(expectedJson));
     }
