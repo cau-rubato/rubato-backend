@@ -3,7 +3,6 @@ package org.rubatophil.www.api.controller;
 import lombok.RequiredArgsConstructor;
 import org.rubatophil.www.api.domain.Manager;
 import org.rubatophil.www.api.domain.mapping.MemberInstrument;
-import org.rubatophil.www.api.domain.member.ClubMember;
 import org.rubatophil.www.api.domain.type.ManagerStatus;
 import org.rubatophil.www.api.domain.type.ManagerType;
 import org.rubatophil.www.api.request.NewManager;
@@ -47,6 +46,7 @@ public class ManagerController {
             managerList.add(ManagerResponse.builder()
                     .managerType(result.getManagerType().toString())
                     .name(result.getClubMember().getName())
+                    .profileImage(result.getClubMember().getProfileImage())
                     .instrument(instrumentList)
                     .generation(result.getClubMember().getGeneration())
                     .department(memberDepartment)

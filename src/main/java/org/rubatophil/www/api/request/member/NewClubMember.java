@@ -25,18 +25,19 @@ public class NewClubMember {
     private String town;        // 읍, 면, 동
     @NotNull
     private String fullAddress;
+
+    private String profileImage;
     @NotNull
     private Integer generation;
     @NotNull
     private List<String> instruments;
-    private String college;
-    private String school;
+    @NotNull
     private String departmentId;
     @NotNull
     private String studentId;
 
     @Builder
-    public NewClubMember(String name, String birth, String phoneNumber, String zipcode, String state, String city, String town, String fullAddress, Integer generation, List<String> instruments, String college, String school, String departmentId, String studentId) {
+    public NewClubMember(String name, String birth, String phoneNumber, String zipcode, String state, String city, String town, String fullAddress, String profileImage, Integer generation, List<String> instruments, String departmentId, String studentId) {
         this.name = name;
         this.birth = birth;
         this.phoneNumber = phoneNumber;
@@ -45,10 +46,9 @@ public class NewClubMember {
         this.city = city;
         this.town = town;
         this.fullAddress = fullAddress;
+        this.profileImage = profileImage;
         this.generation = generation;
         this.instruments = instruments;
-        this.college = college;
-        this.school = school;
         this.departmentId = departmentId;
         this.studentId = studentId;
     }

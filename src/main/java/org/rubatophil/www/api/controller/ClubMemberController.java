@@ -1,7 +1,6 @@
 package org.rubatophil.www.api.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.rubatophil.www.api.domain.Department;
 import org.rubatophil.www.api.domain.mapping.MemberInstrument;
 import org.rubatophil.www.api.domain.member.ClubMember;
 import org.rubatophil.www.api.domain.type.Address;
@@ -78,6 +77,7 @@ public class ClubMemberController {
                         .town(newClubMember.getTown())
                         .fullAddress(newClubMember.getFullAddress())
                         .build())
+                .profileImage(newClubMember.getProfileImage() == null ? null : newClubMember.getProfileImage())
                 .generation(newClubMember.getGeneration())
                 .studentId(newClubMember.getStudentId())
                 .build();

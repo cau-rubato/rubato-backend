@@ -3,7 +3,6 @@ package org.rubatophil.www.api.request;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
