@@ -35,8 +35,8 @@ public class ClubMember extends Member {
     private List<MemberInstrument> memberInstruments = new ArrayList<>();
 
     @Builder
-    public ClubMember(String name, LocalDate birth, String phoneNumber, Address address, Integer generation, String studentId) {
-        super(name, birth, phoneNumber, address);
+    public ClubMember(String name, LocalDate birth, String phoneNumber, Address address, String profileImage, Integer generation, String studentId) {
+        super(name, birth, phoneNumber, address, profileImage);
         this.generation = generation;
         this.studentId = studentId;
     }

@@ -31,12 +31,12 @@ public class NewClubMember {
     private List<String> instruments;
     private String college;
     private String school;
-    private String department;
+    private String departmentId;
     @NotNull
     private String studentId;
 
     @Builder
-    public NewClubMember(String name, String birth, String phoneNumber, String zipcode, String state, String city, String town, String fullAddress, Integer generation, List<String> instruments, String college, String school, String department, String studentId) {
+    public NewClubMember(String name, String birth, String phoneNumber, String zipcode, String state, String city, String town, String fullAddress, Integer generation, List<String> instruments, String college, String school, String departmentId, String studentId) {
         this.name = name;
         this.birth = birth;
         this.phoneNumber = phoneNumber;
@@ -49,7 +49,7 @@ public class NewClubMember {
         this.instruments = instruments;
         this.college = college;
         this.school = school;
-        this.department = department;
+        this.departmentId = departmentId;
         this.studentId = studentId;
     }
 }

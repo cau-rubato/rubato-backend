@@ -19,10 +19,12 @@ public class ClubMemberService {
     private final MemberInstrumentRepository memberInstrumentRepository;
     private final DepartmentRepository departmentRepository;
 
-    public List<ClubMember> getAllClubMembers() {return this.clubMemberRepository.findAll();}
+    public List<ClubMember> getAllClubMembers() { return this.clubMemberRepository.findAll(); }
 
-    public void addNewClubMember(ClubMember clubMember, Department department, List<MemberInstrument> memberInstruments) {
-        this.departmentRepository.save(department);
+    public void addNewClubMember(ClubMember clubMember, Long departmentId, List<MemberInstrument> memberInstruments) {
+        // TODO: NoSuchElementException -> Department save
+        Department dbDepartment = this.departmentRepository.findById(departmentId).get();
+        dbDepartment.addClubMember(clubMember);
         this.clubMemberRepository.save(clubMember);
         this.memberInstrumentRepository.saveAll(memberInstruments);
     }

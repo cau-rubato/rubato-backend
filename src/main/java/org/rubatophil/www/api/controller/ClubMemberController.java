@@ -27,6 +27,7 @@ public class ClubMemberController {
 
     @GetMapping("v1/clubmembers")
     public List<ClubMemberResponse> getClubMemberInfo() {
+
         List<ClubMemberResponse> clubMemberList = new ArrayList<>();
 
         List<ClubMember> clubMemberResult = this.clubMemberService.getAllClubMembers();
@@ -63,6 +64,7 @@ public class ClubMemberController {
 
     @PostMapping("v1/clubmembers")
     public void postClubMemberInfo(@Valid @RequestBody NewClubMember newClubMember) {
+
         String[] births = newClubMember.getBirth().split("\\.");
 
         ClubMember clubMember = ClubMember.builder()
@@ -89,15 +91,7 @@ public class ClubMemberController {
             memberInstruments.add(memberInstrument);
         }
 
-        Department department = Department.builder()
-                .college(newClubMember.getCollege())
-                .school(newClubMember.getSchool())
-                .department(newClubMember.getDepartment())
-                .build();
-
-        department.addClubMember(clubMember);
-
-        clubMemberService.addNewClubMember(clubMember, department, memberInstruments);
+        clubMemberService.addNewClubMember(clubMember, Long.parseLong(newClubMember.getDepartmentId()), memberInstruments);
     }
 
 }

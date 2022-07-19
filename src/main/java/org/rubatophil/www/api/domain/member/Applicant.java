@@ -34,7 +34,7 @@ public class Applicant extends Member {
 
     @Builder
     public Applicant(String name, LocalDate birth, String phoneNumber, Address address, String studentId) {
-        super(name, birth, phoneNumber, address);
+        super(name, birth, phoneNumber, address, null);
         this.studentId = studentId;
     }
 
