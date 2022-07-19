@@ -39,12 +39,20 @@ public class ClubMemberController {
                 instrumentList.add(memberInstrument.getInstrument().toString());
             }
 
+            String memberDepartment = result.getDepartment().getDepartment();
+            if (memberDepartment == null) {
+                memberDepartment = result.getDepartment().getSchool();
+                if (memberDepartment == null) {
+                    memberDepartment = result.getDepartment().getCollege();
+                }
+            }
+
             clubMemberList.add(ClubMemberResponse.builder()
                     .id(result.getId())
                     .name(result.getName())
                     .generation(result.getGeneration())
                     .instruments(instrumentList)
-                    .department(result.getDepartment().getDepartment())
+                    .department(memberDepartment)
                     .studentId(result.getStudentId())
                     .build()
             );
