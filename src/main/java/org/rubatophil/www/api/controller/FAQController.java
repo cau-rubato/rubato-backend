@@ -24,7 +24,7 @@ public class FAQController {
     public List<FAQResponse> getFAQInfo() {
         List<FAQResponse> faqList = new ArrayList<>();
 
-        List<FAQ> serviceResult = this.faqService.getAllFAQs();
+        List<FAQ> serviceResult = faqService.getAllFAQs();
 
         for (FAQ result : serviceResult) {
             faqList.add(FAQResponse.builder()

@@ -14,11 +14,11 @@ public class FAQService {
     private final FAQRepository faqRepository;
 
     public List<FAQ> getAllFAQs() {
-        return this.faqRepository.findAll();
+        return faqRepository.findAll();
     }
 
     public void addNewFAQ(FAQ faq) {
-        this.faqRepository.save(faq);
+        faqRepository.save(faq);
     }
 
 }
