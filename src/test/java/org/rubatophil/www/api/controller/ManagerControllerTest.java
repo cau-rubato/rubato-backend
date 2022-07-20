@@ -100,7 +100,6 @@ public class ManagerControllerTest {
 
         //given
         String url = "/v1/managers";
-        //TODO: profileImage prepersist 동작안함
         String expectedJson = "[{\"managerType\":\"PRESIDENT\",\"name\":\"president\",\"profileImage\":null,\"instrument\":[\"VIOLIN\"],\"generation\":34,\"department\":\"test college\",\"admissionYear\":\"18\"},{\"managerType\":\"VICE_PRESIDENT\",\"name\":\"vice president\",\"profileImage\":null,\"instrument\":[\"VIOLIN\"],\"generation\":34,\"department\":\"test college\",\"admissionYear\":\"18\"}]";
 
         this.managers = new ArrayList<>();

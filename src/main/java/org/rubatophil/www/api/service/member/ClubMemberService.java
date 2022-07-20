@@ -22,7 +22,7 @@ public class ClubMemberService {
     public List<ClubMember> getAllClubMembers() { return this.clubMemberRepository.findAll(); }
 
     public void addNewClubMember(ClubMember clubMember, Long departmentId, List<MemberInstrument> memberInstruments) {
-        // TODO: NoSuchElementException -> Department save
+        //TODO: NoSuchElementException -> Department save
         Department dbDepartment = this.departmentRepository.findById(departmentId).get();
         dbDepartment.addClubMember(clubMember);
         this.clubMemberRepository.save(clubMember);

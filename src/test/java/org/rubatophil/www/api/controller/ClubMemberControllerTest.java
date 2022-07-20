@@ -80,7 +80,6 @@ class ClubMemberControllerTest {
         this.department.addClubMember(this.clubMember);
     }
 
-
     @Test
     @DisplayName("getClubMemberInfo")
     public void getClubMemberInfoTest() throws Exception {
