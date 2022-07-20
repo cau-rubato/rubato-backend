@@ -32,12 +32,12 @@ public class NewClubMember {
     @NotNull
     private List<String> instruments;
     @NotNull
-    private String departmentId;
+    private Long departmentId;
     @NotNull
     private String studentId;
 
     @Builder
-    public NewClubMember(String name, String birth, String phoneNumber, String zipcode, String state, String city, String town, String fullAddress, String profileImage, Integer generation, List<String> instruments, String departmentId, String studentId) {
+    public NewClubMember(String name, String birth, String phoneNumber, String zipcode, String state, String city, String town, String fullAddress, String profileImage, Integer generation, List<String> instruments, Long departmentId, String studentId) {
         this.name = name;
         this.birth = birth;
         this.phoneNumber = phoneNumber;

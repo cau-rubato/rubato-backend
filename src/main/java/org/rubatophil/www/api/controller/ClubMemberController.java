@@ -91,7 +91,7 @@ public class ClubMemberController {
             memberInstruments.add(memberInstrument);
         }
 
-        clubMemberService.addNewClubMember(clubMember, Long.parseLong(newClubMember.getDepartmentId()), memberInstruments);
+        clubMemberService.addNewClubMember(clubMember, newClubMember.getDepartmentId(), memberInstruments);
     }
 
 }

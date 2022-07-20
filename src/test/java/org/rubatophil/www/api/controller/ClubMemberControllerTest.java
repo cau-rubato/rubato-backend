@@ -43,7 +43,7 @@ class ClubMemberControllerTest {
     ClubMember clubMember;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
 
         this.address = Address.builder()
                 .zipcode("00000")
@@ -83,7 +83,7 @@ class ClubMemberControllerTest {
 
     @Test
     @DisplayName("getClubMemberInfo")
-    void getClubMemberInfo() throws Exception {
+    public void getClubMemberInfoTest() throws Exception {
 
         //given
         String url = "/v1/clubmembers";
@@ -104,7 +104,7 @@ class ClubMemberControllerTest {
 
     @Test
     @DisplayName("postClubMemberInfo")
-    void postClubMemberInfo() throws Exception {
+    public void postClubMemberInfoTest() throws Exception {
 
         //given
         String url = "/v1/clubmembers";

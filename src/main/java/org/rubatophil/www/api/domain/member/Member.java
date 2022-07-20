@@ -80,7 +80,7 @@ public abstract class Member {
         concertMember.setMember(this);
     }
 
-    // TODO: default image url PrePersist 생성
+    //TODO: default image url PrePersist 생성
     @PrePersist
     public void PrePersist() {
         this.profileImage = this.profileImage == null ? "www.default.com" : this.profileImage;
