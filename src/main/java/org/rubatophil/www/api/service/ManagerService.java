@@ -6,8 +6,6 @@ import org.rubatophil.www.api.domain.type.ManagerType;
 import org.rubatophil.www.api.repository.ManagerRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class ManagerService {
