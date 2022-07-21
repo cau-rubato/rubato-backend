@@ -9,7 +9,6 @@ import org.rubatophil.www.api.domain.mapping.MemberInstrument;
 import org.rubatophil.www.api.domain.member.ClubMember;
 import org.rubatophil.www.api.domain.type.Address;
 import org.rubatophil.www.api.domain.type.Instrument;
-import org.rubatophil.www.api.domain.type.ManagerStatus;
 import org.rubatophil.www.api.domain.type.ManagerType;
 import org.rubatophil.www.api.repository.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +31,13 @@ public class ManagerServiceTest {
 
     @MockBean
     ManagerRepository managerRepository;
-
     List<Manager> managers;
-    Manager manager;
-    ClubMember clubMember;
+    Manager president;
+    ClubMember memberPresident;
+    Manager vicePresident;
+    ClubMember memberVicePresident;
+    Manager secretary;
+    ClubMember memberSecretary;
     Department department;
 
     @BeforeEach
@@ -45,11 +47,11 @@ public class ManagerServiceTest {
                 .college("test college")
                 .build();
 
-        this.manager = Manager.builder()
+        this.president = Manager.builder()
                 .managerType(ManagerType.PRESIDENT)
                 .startedAt(LocalDate.of(2022, 1, 1))
                 .build();
-        this.clubMember = ClubMember.builder()
+        this.memberPresident = ClubMember.builder()
                 .name("president")
                 .birth(LocalDate.of(1999,1,1))
                 .phoneNumber("010-0000-0000")
@@ -59,27 +61,99 @@ public class ManagerServiceTest {
                 .generation(34)
                 .studentId("20180000")
                 .build();
-        this.clubMember.addMemberInstrument(MemberInstrument.builder()
+        this.memberPresident.addMemberInstrument(MemberInstrument.builder()
                 .instrument(Instrument.VIOLIN)
                 .build()
         );
-        this.manager.setClubMember(this.clubMember);
-        this.department.addClubMember(this.clubMember);
+        this.president.setClubMember(this.memberPresident);
+        this.department.addClubMember(this.memberPresident);
+
+        this.vicePresident = Manager.builder()
+                .managerType(ManagerType.VICE_PRESIDENT)
+                .startedAt(LocalDate.of(2022, 1, 1))
+                .build();
+        this.memberVicePresident = ClubMember.builder()
+                .name("vice president")
+                .birth(LocalDate.of(1999,1,1))
+                .phoneNumber("010-0000-0000")
+                .address(Address.builder()
+                        .fullAddress("full address")
+                        .build())
+                .generation(34)
+                .studentId("20180000")
+                .build();
+        this.memberVicePresident.addMemberInstrument(MemberInstrument.builder()
+                .instrument(Instrument.VIOLIN)
+                .build()
+        );
+        this.vicePresident.setClubMember(this.memberVicePresident);
+        this.department.addClubMember(this.memberVicePresident);
+
+        this.secretary = Manager.builder()
+                .managerType(ManagerType.SECRETARY)
+                .startedAt(LocalDate.of(2022, 1, 1))
+                .build();
+        this.memberSecretary = ClubMember.builder()
+                .name("secretary")
+                .birth(LocalDate.of(1999,1,1))
+                .phoneNumber("010-0000-0000")
+                .address(Address.builder()
+                        .fullAddress("full address")
+                        .build())
+                .generation(34)
+                .studentId("20180000")
+                .build();
+        this.memberSecretary.addMemberInstrument(MemberInstrument.builder()
+                .instrument(Instrument.VIOLIN)
+                .build()
+        );
+        this.secretary.setClubMember(this.memberSecretary);
+        this.department.addClubMember(this.memberSecretary);
     }
 
     @Test
-    @DisplayName("getAllCurrentManagers")
-    public void getAllCurrentManagersTest() {
+    @DisplayName("getPresident")
+    public void getPresidentTest() {
 
         //given
         this.managers = new ArrayList<>();
-        this.managers.add(this.manager);
+        this.managers.add(this.president);
 
         //when
-        when(this.managerRepository.findAllByStatus(ManagerStatus.ACTIVATED)).thenReturn(this.managers);
+        when(this.managerRepository.findByManagerType(ManagerType.PRESIDENT)).thenReturn(this.president);
 
         //then
-        assertEquals(this.managers, this.managerService.getAllCurrentManagers());
+        assertEquals(this.managers.get(0), this.managerService.getPresident());
+    }
+
+    @Test
+    @DisplayName("getVicePresident")
+    public void getVicePresidentTest() {
+
+        //given
+        this.managers = new ArrayList<>();
+        this.managers.add(this.vicePresident);
+
+        //when
+        when(this.managerRepository.findByManagerType(ManagerType.VICE_PRESIDENT)).thenReturn(this.vicePresident);
+
+        //then
+        assertEquals(this.managers.get(0), this.managerService.getVicePresident());
+    }
+
+    @Test
+    @DisplayName("getSecretary")
+    public void getSecretaryTest() {
+
+        //given
+        this.managers = new ArrayList<>();
+        this.managers.add(this.secretary);
+
+        //when
+        when(this.managerRepository.findByManagerType(ManagerType.SECRETARY)).thenReturn(this.secretary);
+
+        //then
+        assertEquals(this.managers.get(0), this.managerService.getSecretary());
     }
 
     @Test
@@ -88,9 +162,9 @@ public class ManagerServiceTest {
 
         //given
         //when
-        this.managerService.addNewManager(this.manager);
+        this.managerService.addNewManager(this.president);
 
         //then
-        verify(this.managerRepository).save(this.manager);
+        verify(this.managerRepository).save(this.president);
     }
 }

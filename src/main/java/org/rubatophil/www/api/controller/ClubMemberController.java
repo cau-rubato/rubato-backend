@@ -77,7 +77,7 @@ public class ClubMemberController {
                         .town(newClubMember.getTown())
                         .fullAddress(newClubMember.getFullAddress())
                         .build())
-                .profileImage(newClubMember.getProfileImage() == null ? null : newClubMember.getProfileImage())
+                .profileImage(newClubMember.getProfileImage())
                 .generation(newClubMember.getGeneration())
                 .studentId(newClubMember.getStudentId())
                 .build();

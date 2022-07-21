@@ -2,7 +2,6 @@ package org.rubatophil.www.api.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.rubatophil.www.api.domain.Manager;
-import org.rubatophil.www.api.domain.mapping.MemberInstrument;
 import org.rubatophil.www.api.domain.type.ManagerStatus;
 import org.rubatophil.www.api.domain.type.ManagerType;
 import org.rubatophil.www.api.request.NewManager;
@@ -12,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,38 +20,21 @@ public class ManagerController {
     private final ManagerService managerService;
 
     @GetMapping("v1/managers")
-    public List<ManagerResponse> getCurrentManagerInfo() {
-        List<ManagerResponse> managerList = new ArrayList<>();
+    public Map<String, ManagerResponse> getCurrentManagerInfo() {
+        Map<String, ManagerResponse> managerList = new LinkedHashMap<>();
 
-        List<Manager> managerResult = this.managerService.getAllCurrentManagers();
-
-        for (Manager result : managerResult) {
-
-            List<String> instrumentList = new ArrayList<>();
-
-            for (MemberInstrument memberInstrument : result.getClubMember().getMemberInstruments()) {
-                instrumentList.add(memberInstrument.getInstrument().toString());
-            }
-
-            String memberDepartment = result.getClubMember().getDepartment().getDepartment();
-            if (memberDepartment == null) {
-                memberDepartment = result.getClubMember().getDepartment().getSchool();
-                if (memberDepartment == null) {
-                    memberDepartment = result.getClubMember().getDepartment().getCollege();
-                }
-            }
-
-            managerList.add(ManagerResponse.builder()
-                    .managerType(result.getManagerType().toString())
-                    .name(result.getClubMember().getName())
-                    .profileImage(result.getClubMember().getProfileImage())
-                    .instrument(instrumentList)
-                    .generation(result.getClubMember().getGeneration())
-                    .department(memberDepartment)
-                    .admissionYear(result.getClubMember().getStudentId().substring(2, 4))
-                    .build()
-            );
-        }
+        managerList.put("president", managerService.getPresident() == null ? null : ManagerResponse.builder()
+                .manager(managerService.getPresident())
+                .build()
+        );
+        managerList.put("vice president", managerService.getVicePresident() == null ? null : ManagerResponse.builder()
+                .manager(managerService.getVicePresident())
+                .build()
+        );
+        managerList.put("secretary", managerService.getSecretary() == null ? null : ManagerResponse.builder()
+                .manager(managerService.getSecretary())
+                .build()
+        );
 
         return managerList;
     }

@@ -42,6 +42,8 @@ public class ManagerControllerTest {
     ClubMember memberPresident;
     Manager vicePresident;
     ClubMember memberVicePresident;
+    Manager secretary;
+    ClubMember memberSecretary;
     Department department;
 
     @BeforeEach
@@ -92,6 +94,27 @@ public class ManagerControllerTest {
         );
         this.vicePresident.setClubMember(this.memberVicePresident);
         this.department.addClubMember(this.memberVicePresident);
+
+        this.secretary = Manager.builder()
+                .managerType(ManagerType.SECRETARY)
+                .startedAt(LocalDate.of(2022, 1, 1))
+                .build();
+        this.memberSecretary = ClubMember.builder()
+                .name("secretary")
+                .birth(LocalDate.of(1999,1,1))
+                .phoneNumber("010-0000-0000")
+                .address(Address.builder()
+                        .fullAddress("full address")
+                        .build())
+                .generation(34)
+                .studentId("20180000")
+                .build();
+        this.memberSecretary.addMemberInstrument(MemberInstrument.builder()
+                .instrument(Instrument.VIOLIN)
+                .build()
+        );
+        this.secretary.setClubMember(this.memberSecretary);
+        this.department.addClubMember(this.memberSecretary);
     }
 
     @Test
@@ -100,14 +123,46 @@ public class ManagerControllerTest {
 
         //given
         String url = "/v1/managers";
-        String expectedJson = "[{\"managerType\":\"PRESIDENT\",\"name\":\"president\",\"profileImage\":null,\"instrument\":[\"VIOLIN\"],\"generation\":34,\"department\":\"test college\",\"admissionYear\":\"18\"},{\"managerType\":\"VICE_PRESIDENT\",\"name\":\"vice president\",\"profileImage\":null,\"instrument\":[\"VIOLIN\"],\"generation\":34,\"department\":\"test college\",\"admissionYear\":\"18\"}]";
+        String expectedJson = "{\"president\":{\"name\":\"president\",\"profileImage\":null,\"instrument\":[\"VIOLIN\"],\"generation\":34,\"department\":\"test college\",\"admissionYear\":\"18\"}," +
+                "\"vice president\":{\"name\":\"vice president\",\"profileImage\":null,\"instrument\":[\"VIOLIN\"],\"generation\":34,\"department\":\"test college\",\"admissionYear\":\"18\"}," +
+                "\"secretary\":{\"name\":\"secretary\",\"profileImage\":null,\"instrument\":[\"VIOLIN\"],\"generation\":34,\"department\":\"test college\",\"admissionYear\":\"18\"}}";
 
         this.managers = new ArrayList<>();
         this.managers.add(this.president);
         this.managers.add(this.vicePresident);
+        this.managers.add(this.secretary);
 
         //when
-        when(this.managerService.getAllCurrentManagers()).thenReturn(this.managers);
+        when(this.managerService.getPresident()).thenReturn(this.president);
+        when(this.managerService.getVicePresident()).thenReturn(this.vicePresident);
+        when(this.managerService.getSecretary()).thenReturn(this.secretary);
+
+        ResultActions mvcResult = this.mockMvc.perform(get(url));
+
+        //then
+        mvcResult.andExpect(status().isOk())
+                .andExpect(content().string(expectedJson));
+    }
+
+    @Test
+    @DisplayName("[getCurrentManagerInfo] 하나의 manager가 null")
+    public void getCurrentManagerInfoNullTest() throws Exception {
+
+        //given
+        String url = "/v1/managers";
+        String expectedJson = "{\"president\":{\"name\":\"president\",\"profileImage\":null,\"instrument\":[\"VIOLIN\"],\"generation\":34,\"department\":\"test college\",\"admissionYear\":\"18\"}," +
+                "\"vice president\":{\"name\":\"vice president\",\"profileImage\":null,\"instrument\":[\"VIOLIN\"],\"generation\":34,\"department\":\"test college\",\"admissionYear\":\"18\"}," +
+                "\"secretary\":null}";
+
+        this.managers = new ArrayList<>();
+        this.managers.add(this.president);
+        this.managers.add(this.vicePresident);
+        this.managers.add(null);
+
+        //when
+        when(this.managerService.getPresident()).thenReturn(this.president);
+        when(this.managerService.getVicePresident()).thenReturn(this.vicePresident);
+        when(this.managerService.getSecretary()).thenReturn(null);
 
         ResultActions mvcResult = this.mockMvc.perform(get(url));
 
