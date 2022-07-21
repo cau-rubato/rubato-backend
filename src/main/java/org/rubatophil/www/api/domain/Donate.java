@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,8 @@ public class Donate {
     private List<DonateBudget> donateBudgets = new ArrayList<>();
 
     private String message;
+    @NotNull
+    private Long amount;
 
     @LastModifiedDate
     @Setter(AccessLevel.NONE)
@@ -40,8 +43,9 @@ public class Donate {
     private LocalDateTime createdAt;
 
     @Builder
-    public Donate(String message) {
+    public Donate(String message, Long amount) {
         this.message = message;
+        this.amount = amount;
     }
 
     public void addDonateBudget(DonateBudget donateBudget) {
