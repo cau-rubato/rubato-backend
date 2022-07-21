@@ -23,18 +23,9 @@ public class ManagerController {
     public Map<String, ManagerResponse> getCurrentManagerInfo() {
         Map<String, ManagerResponse> managerList = new LinkedHashMap<>();
 
-        managerList.put("president", managerService.getPresident() == null ? null : ManagerResponse.builder()
-                .manager(managerService.getPresident())
-                .build()
-        );
-        managerList.put("vice president", managerService.getVicePresident() == null ? null : ManagerResponse.builder()
-                .manager(managerService.getVicePresident())
-                .build()
-        );
-        managerList.put("secretary", managerService.getSecretary() == null ? null : ManagerResponse.builder()
-                .manager(managerService.getSecretary())
-                .build()
-        );
+        managerList.put("president", managerService.getPresident() == null ? null : new ManagerResponse(managerService.getPresident()));
+        managerList.put("vice president", managerService.getVicePresident() == null ? null : new ManagerResponse(managerService.getVicePresident()));
+        managerList.put("secretary", managerService.getSecretary() == null ? null : new ManagerResponse(managerService.getSecretary()));
 
         return managerList;
     }

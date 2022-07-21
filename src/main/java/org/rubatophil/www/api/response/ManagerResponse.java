@@ -19,6 +19,15 @@ public class ManagerResponse {
     private String admissionYear;
 
     @Builder
+    public ManagerResponse(String name, String profileImage, List<String> instrument, Integer generation, String department, String admissionYear) {
+        this.name = name;
+        this.profileImage = profileImage;
+        this.instrument = instrument;
+        this.generation = generation;
+        this.department = department;
+        this.admissionYear = admissionYear;
+    }
+
     public ManagerResponse(Manager manager) {
 
         List<String> instrumentList = new ArrayList<>();

@@ -20,7 +20,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
@@ -37,7 +36,6 @@ public class ManagerControllerTest {
 
     @MockBean
     ManagerService managerService;
-    List<Manager> managers;
     Manager president;
     ClubMember memberPresident;
     Manager vicePresident;
@@ -127,11 +125,6 @@ public class ManagerControllerTest {
                 "\"vice president\":{\"name\":\"vice president\",\"profileImage\":null,\"instrument\":[\"VIOLIN\"],\"generation\":34,\"department\":\"test college\",\"admissionYear\":\"18\"}," +
                 "\"secretary\":{\"name\":\"secretary\",\"profileImage\":null,\"instrument\":[\"VIOLIN\"],\"generation\":34,\"department\":\"test college\",\"admissionYear\":\"18\"}}";
 
-        this.managers = new ArrayList<>();
-        this.managers.add(this.president);
-        this.managers.add(this.vicePresident);
-        this.managers.add(this.secretary);
-
         //when
         when(this.managerService.getPresident()).thenReturn(this.president);
         when(this.managerService.getVicePresident()).thenReturn(this.vicePresident);
@@ -153,11 +146,6 @@ public class ManagerControllerTest {
         String expectedJson = "{\"president\":{\"name\":\"president\",\"profileImage\":null,\"instrument\":[\"VIOLIN\"],\"generation\":34,\"department\":\"test college\",\"admissionYear\":\"18\"}," +
                 "\"vice president\":{\"name\":\"vice president\",\"profileImage\":null,\"instrument\":[\"VIOLIN\"],\"generation\":34,\"department\":\"test college\",\"admissionYear\":\"18\"}," +
                 "\"secretary\":null}";
-
-        this.managers = new ArrayList<>();
-        this.managers.add(this.president);
-        this.managers.add(this.vicePresident);
-        this.managers.add(null);
 
         //when
         when(this.managerService.getPresident()).thenReturn(this.president);

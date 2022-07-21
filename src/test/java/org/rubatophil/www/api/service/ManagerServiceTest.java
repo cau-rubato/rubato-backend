@@ -16,8 +16,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -31,7 +29,6 @@ public class ManagerServiceTest {
 
     @MockBean
     ManagerRepository managerRepository;
-    List<Manager> managers;
     Manager president;
     ClubMember memberPresident;
     Manager vicePresident;
@@ -116,14 +113,11 @@ public class ManagerServiceTest {
     public void getPresidentTest() {
 
         //given
-        this.managers = new ArrayList<>();
-        this.managers.add(this.president);
-
         //when
         when(this.managerRepository.findByManagerType(ManagerType.PRESIDENT)).thenReturn(this.president);
 
         //then
-        assertEquals(this.managers.get(0), this.managerService.getPresident());
+        assertEquals(this.president, this.managerService.getPresident());
     }
 
     @Test
@@ -131,14 +125,11 @@ public class ManagerServiceTest {
     public void getVicePresidentTest() {
 
         //given
-        this.managers = new ArrayList<>();
-        this.managers.add(this.vicePresident);
-
         //when
         when(this.managerRepository.findByManagerType(ManagerType.VICE_PRESIDENT)).thenReturn(this.vicePresident);
 
         //then
-        assertEquals(this.managers.get(0), this.managerService.getVicePresident());
+        assertEquals(this.vicePresident, this.managerService.getVicePresident());
     }
 
     @Test
@@ -146,14 +137,11 @@ public class ManagerServiceTest {
     public void getSecretaryTest() {
 
         //given
-        this.managers = new ArrayList<>();
-        this.managers.add(this.secretary);
-
         //when
         when(this.managerRepository.findByManagerType(ManagerType.SECRETARY)).thenReturn(this.secretary);
 
         //then
-        assertEquals(this.managers.get(0), this.managerService.getSecretary());
+        assertEquals(this.secretary, this.managerService.getSecretary());
     }
 
     @Test
