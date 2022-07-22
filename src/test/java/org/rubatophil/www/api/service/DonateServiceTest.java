@@ -11,7 +11,6 @@ import org.rubatophil.www.api.repository.BudgetRepository;
 import org.rubatophil.www.api.repository.DonateBudgetRepository;
 import org.rubatophil.www.api.repository.DonateRepository;
 import org.rubatophil.www.api.repository.MemberRepository;
-import org.rubatophil.www.api.response.member.MemberResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -48,6 +47,7 @@ class DonateServiceTest {
 
     private Donate donate;
     private List<Long> budgetIds;
+    List<Budget> budgets;
 
     private final Long memberId = 3L;
 
@@ -70,7 +70,7 @@ class DonateServiceTest {
 
         when(this.memberRepository.findById(3L)).thenReturn(member);
 
-        List<Budget> budgets = new ArrayList<>();
+        this.budgets = new ArrayList<>();
 
         Budget budget1 = Budget.builder()
                 .name("budget1")
@@ -84,6 +84,7 @@ class DonateServiceTest {
         budgets.add(budget2);
 
         when(this.budgetRepository.findAllById(budgetIds)).thenReturn(budgets);
+        when(this.budgetRepository.findAll()).thenReturn(budgets);
 
     }
 
@@ -128,6 +129,18 @@ class DonateServiceTest {
 
         //then
         assertEquals(3, result.size());
+    }
+
+    @Test
+    @DisplayName("getAllBudgets")
+    public void getAllBudgetsTest() throws Exception {
+        //given
+        
+        //when
+        List<Budget> result = this.donateService.getAllBudgets();
+        //then
+        assertEquals(2, result.size());
+        assertEquals(this.budgets, result);
     }
 
 }

@@ -46,6 +46,7 @@ class DonateControllerTest {
     DonateService donateService;
 
     private Donate donate;
+    private List<Budget> budgets;
 
     @BeforeEach
     void setUp() {
@@ -67,6 +68,11 @@ class DonateControllerTest {
                 .name("budget2")
                 .build();
 
+        this.budgets = new ArrayList<>();
+        this.budgets.add(budget1);
+        this.budgets.add(budget2);
+
+        when(donateService.getAllBudgets()).thenReturn(budgets);
 
         DonateBudget donateBudget1 = new DonateBudget();
         DonateBudget donateBudget2 = new DonateBudget();
@@ -88,7 +94,7 @@ class DonateControllerTest {
     @DisplayName("postDonateInfo")
     public void postDonateInfoTest() throws Exception {
         //given
-        String url = "/donate";
+        String url = "/v1/donate";
         String newDonate = "{\"budgetIds\": [1, 2],\n" +
                 "\"message\": \"test message\",\n" +
                 "\"amount\": 100000,\n" +
@@ -112,10 +118,25 @@ class DonateControllerTest {
     }
 
     @Test
+    @DisplayName("getBudgetInfo")
+    public void getBudgetInfo() throws Exception {
+        //given
+        String url = "/v1/donate/budgets";
+        String expectedJson = "[{\"name\":\"budget1\"},{\"name\":\"budget2\"}]";
+
+        //when
+        ResultActions result = this.mockMvc.perform(get(url));
+
+        //then
+        result.andExpect(status().isOk())
+                .andExpect(content().string(expectedJson));
+    }
+
+    @Test
     @DisplayName("getDonateInfo")
     public void getDonateInfoTest() throws Exception {
         //given
-        String url = "/donate";
+        String url = "/v1/donate";
         String expectedJson = "[{\"name\":\"test clubMember\"}]";
 
         //when
