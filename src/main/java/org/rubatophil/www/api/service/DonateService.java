@@ -23,15 +23,15 @@ public class DonateService {
     private final DonateBudgetRepository donateBudgetRepository;
 
     public void addNewDonate(Donate donate, List<Long> budgetIds, Long memberId) {
-        Member member = memberRepository.findById(memberId).get();
-        List<Budget> budgets = budgetRepository.findAllById(budgetIds);
+        Member member = this.memberRepository.findById(memberId).get();
+        List<Budget> budgets = this.budgetRepository.findAllById(budgetIds);
 
-        donateRepository.save(donate);
+        this.donateRepository.save(donate);
 
         for (Budget budget : budgets) {
             DonateBudget donateBudget = new DonateBudget();
 
-            donateBudgetRepository.save(donateBudget);
+            this.donateBudgetRepository.save(donateBudget);
 
             donate.addDonateBudget(donateBudget);
             budget.addDonateBudget(donateBudget);
