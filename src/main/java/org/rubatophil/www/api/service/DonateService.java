@@ -39,4 +39,8 @@ public class DonateService {
 
         member.addDonate(donate);
     }
+
+    public List<Donate> getAllDonates() {
+        return this.donateRepository.findAll();
+    }
 }

@@ -26,8 +26,14 @@ public class DonateController {
 
         List<DonateResponse> donateResponses = new ArrayList<>();
 
-        donateResponses.add(DonateResponse.builder().name("백승윤").build());
-        donateResponses.add(DonateResponse.builder().name("김혜성").build());
+        List<Donate> donates = this.donateService.getAllDonates();
+
+        for (Donate donate : donates) {
+            donateResponses.add(DonateResponse.builder()
+                    .name(donate.getMember().getName())
+
+                    .build());
+        }
 
         return donateResponses;
 

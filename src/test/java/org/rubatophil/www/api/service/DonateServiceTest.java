@@ -99,7 +99,35 @@ class DonateServiceTest {
         verify(this.donateBudgetRepository, times(2)).save(any());
     }
 
+    @Test
+    @DisplayName("getAllDonates")
+    public void getAllDonatesTest() throws Exception {
+        //given
+        List<Donate> donates = new ArrayList<>();
+
+        donates.add(Donate.builder()
+                .message("donate 1")
+                .amount(100L)
+                .build());
+
+        donates.add(Donate.builder()
+                .message("donate 2")
+                .amount(200L)
+                .build());
+
+        donates.add(Donate.builder()
+                .message("donate 3")
+                .amount(300L)
+                .build());
+
+        when(this.donateRepository.findAll()).thenReturn(donates);
 
 
+        //when
+        List<Donate> result = this.donateService.getAllDonates();
+
+        //then
+        assertEquals(3, result.size());
+    }
 
 }

@@ -3,7 +3,11 @@ package org.rubatophil.www.api.controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.rubatophil.www.api.domain.Budget;
 import org.rubatophil.www.api.domain.Donate;
+import org.rubatophil.www.api.domain.mapping.DonateBudget;
+import org.rubatophil.www.api.domain.member.ClubMember;
+import org.rubatophil.www.api.domain.member.Member;
 import org.rubatophil.www.api.service.DonateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.servlet.HttpEncodingAutoConfiguration;
@@ -19,13 +23,17 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(DonateController.class)
@@ -37,9 +45,43 @@ class DonateControllerTest {
     @MockBean
     DonateService donateService;
 
-    @BeforeEach
-    public void setup() {
+    private Donate donate;
 
+    @BeforeEach
+    void setUp() {
+        this.donate = Donate.builder()
+                .message("test message")
+                .amount(10000L)
+                .build();
+
+        Optional<Member> member = Optional.of(ClubMember.builder()
+                .name("test clubMember")
+                .generation(33)
+                .build());
+
+        Budget budget1 = Budget.builder()
+                .name("budget1")
+                .build();
+
+        Budget budget2 = Budget.builder()
+                .name("budget2")
+                .build();
+
+
+        DonateBudget donateBudget1 = new DonateBudget();
+        DonateBudget donateBudget2 = new DonateBudget();
+
+        budget1.addDonateBudget(donateBudget1);
+        budget2.addDonateBudget(donateBudget2);
+
+        this.donate.addDonateBudget(donateBudget1);
+        this.donate.addDonateBudget(donateBudget2);
+
+        member.get().addDonate(this.donate);
+
+        List<Donate> donates = new ArrayList<>();
+        donates.add(donate);
+        when(donateService.getAllDonates()).thenReturn(donates);
     }
 
     @Test
@@ -66,7 +108,22 @@ class DonateControllerTest {
 
         //then
         mvcResult.andExpect(status().isOk());
-        verify(donateService).addNewDonate(any(), eq(budgetIds),eq(3L));
+        verify(this.donateService).addNewDonate(any(), eq(budgetIds),eq(3L));
+    }
+
+    @Test
+    @DisplayName("getDonateInfo")
+    public void getDonateInfoTest() throws Exception {
+        //given
+        String url = "/donate";
+        String expectedJson = "[{\"name\":\"test clubMember\"}]";
+
+        //when
+        ResultActions result = this.mockMvc.perform(get(url));
+
+        //then
+        result.andExpect(status().isOk())
+                .andExpect(content().string(expectedJson));
     }
 
 }
