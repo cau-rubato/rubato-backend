@@ -80,11 +80,11 @@ class DonateServiceTest {
                 .name("budget2")
                 .build();
 
-        budgets.add(budget1);
-        budgets.add(budget2);
+        this.budgets.add(budget1);
+        this.budgets.add(budget2);
 
-        when(this.budgetRepository.findAllById(budgetIds)).thenReturn(budgets);
-        when(this.budgetRepository.findAll()).thenReturn(budgets);
+        when(this.budgetRepository.findAllById(this.budgetIds)).thenReturn(this.budgets);
+        when(this.budgetRepository.findAll()).thenReturn(this.budgets);
 
     }
 
@@ -129,18 +129,6 @@ class DonateServiceTest {
 
         //then
         assertEquals(3, result.size());
-    }
-
-    @Test
-    @DisplayName("getAllBudgets")
-    public void getAllBudgetsTest() throws Exception {
-        //given
-        
-        //when
-        List<Budget> result = this.donateService.getAllBudgets();
-        //then
-        assertEquals(2, result.size());
-        assertEquals(this.budgets, result);
     }
 
 }

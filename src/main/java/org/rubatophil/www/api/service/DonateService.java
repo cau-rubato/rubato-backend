@@ -43,9 +43,4 @@ public class DonateService {
     public List<Donate> getAllDonates() {
         return this.donateRepository.findAll();
     }
-
-
-    public List<Budget> getAllBudgets() {
-        return this.budgetRepository.findAll();
-    }
 }

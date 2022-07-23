@@ -6,6 +6,7 @@ import org.rubatophil.www.api.domain.Donate;
 import org.rubatophil.www.api.request.DonateForm;
 import org.rubatophil.www.api.response.donate.BudgetResponse;
 import org.rubatophil.www.api.response.donate.DonateResponse;
+import org.rubatophil.www.api.service.BudgetService;
 import org.rubatophil.www.api.service.DonateService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class DonateController {
 
     private final DonateService donateService;
+    private final BudgetService budgetService;
 
     @GetMapping("v1/donate")
     public List<DonateResponse> getDonateInfo() {
@@ -40,7 +42,7 @@ public class DonateController {
     public List<BudgetResponse> getBudgetInfo() {
         List<BudgetResponse> budgetResponses = new ArrayList<>();
 
-        List<Budget> budgets = donateService.getAllBudgets();
+        List<Budget> budgets = this.budgetService.getAllBudgets();
 
         for (Budget budget : budgets) {
             budgetResponses.add(BudgetResponse.builder()
@@ -58,7 +60,7 @@ public class DonateController {
                 .message(donateForm.getMessage())
                 .build();
 
-        donateService.addNewDonate(donate, donateForm.getBudgetIds(), donateForm.getMemberId());
+        this.donateService.addNewDonate(donate, donateForm.getBudgetIds(), donateForm.getMemberId());
     }
 
 }

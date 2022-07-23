@@ -8,6 +8,7 @@ import org.rubatophil.www.api.domain.Donate;
 import org.rubatophil.www.api.domain.mapping.DonateBudget;
 import org.rubatophil.www.api.domain.member.ClubMember;
 import org.rubatophil.www.api.domain.member.Member;
+import org.rubatophil.www.api.service.BudgetService;
 import org.rubatophil.www.api.service.DonateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.servlet.HttpEncodingAutoConfiguration;
@@ -45,6 +46,9 @@ class DonateControllerTest {
     @MockBean
     DonateService donateService;
 
+    @MockBean
+    BudgetService budgetService;
+
     private Donate donate;
     private List<Budget> budgets;
 
@@ -72,7 +76,7 @@ class DonateControllerTest {
         this.budgets.add(budget1);
         this.budgets.add(budget2);
 
-        when(donateService.getAllBudgets()).thenReturn(budgets);
+        when(this.budgetService.getAllBudgets()).thenReturn(this.budgets);
 
         DonateBudget donateBudget1 = new DonateBudget();
         DonateBudget donateBudget2 = new DonateBudget();
@@ -86,8 +90,8 @@ class DonateControllerTest {
         member.get().addDonate(this.donate);
 
         List<Donate> donates = new ArrayList<>();
-        donates.add(donate);
-        when(donateService.getAllDonates()).thenReturn(donates);
+        donates.add(this.donate);
+        when(this.donateService.getAllDonates()).thenReturn(donates);
     }
 
     @Test
@@ -115,6 +119,31 @@ class DonateControllerTest {
         //then
         mvcResult.andExpect(status().isOk());
         verify(this.donateService).addNewDonate(any(), eq(budgetIds),eq(3L));
+    }
+
+    @Test
+    @DisplayName("postDonateInfo with null amount")
+    public void postDonateInfoTestWithNullAmount() throws Exception {
+        //given
+        String url = "/v1/donate";
+        String newDonate = "{\"budgetIds\": [1, 2],\n" +
+                "\"message\": \"test message\",\n" +
+                "\"memberId\": 3\n" +
+                "}";
+
+        List<Long> budgetIds = new ArrayList<>();
+        budgetIds.add(1L);
+        budgetIds.add(2L);
+
+        //when
+        ResultActions mvcResult = this.mockMvc.perform(post(url)
+                .content(newDonate)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+        );
+
+        //then
+        mvcResult.andExpect(status().isBadRequest());
     }
 
     @Test
