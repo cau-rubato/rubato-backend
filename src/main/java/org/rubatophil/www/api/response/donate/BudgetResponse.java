@@ -6,6 +6,6 @@ import lombok.Setter;
 
 @Builder
 @Getter @Setter
-public class DonateResponse {
-    private String name;
+public class BudgetResponse {
+    String name;
 }
