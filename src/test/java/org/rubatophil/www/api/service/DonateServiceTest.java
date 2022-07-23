@@ -10,7 +10,7 @@ import org.rubatophil.www.api.domain.member.Member;
 import org.rubatophil.www.api.repository.BudgetRepository;
 import org.rubatophil.www.api.repository.DonateBudgetRepository;
 import org.rubatophil.www.api.repository.DonateRepository;
-import org.rubatophil.www.api.repository.MemberRepository;
+import org.rubatophil.www.api.repository.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;

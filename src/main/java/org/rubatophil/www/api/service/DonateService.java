@@ -8,7 +8,7 @@ import org.rubatophil.www.api.domain.member.Member;
 import org.rubatophil.www.api.repository.BudgetRepository;
 import org.rubatophil.www.api.repository.DonateBudgetRepository;
 import org.rubatophil.www.api.repository.DonateRepository;
-import org.rubatophil.www.api.repository.MemberRepository;
+import org.rubatophil.www.api.repository.member.MemberRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class DonateService {
     private final DonateBudgetRepository donateBudgetRepository;
 
     public void addNewDonate(Donate donate, List<Long> budgetIds, Long memberId) {
-        Member member = this.memberRepository.findById(memberId).get();
+        Member member = (Member) this.memberRepository.findById(memberId).get();
         List<Budget> budgets = this.budgetRepository.findAllById(budgetIds);
 
         this.donateRepository.save(donate);
