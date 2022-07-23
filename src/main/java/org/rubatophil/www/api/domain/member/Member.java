@@ -52,7 +52,6 @@ public abstract class Member {
     @Embedded
     @NotNull
     private Address address;
-
     private String profileImage;
 
     @LastModifiedDate
@@ -62,12 +61,11 @@ public abstract class Member {
     @Setter(AccessLevel.NONE)
     private LocalDateTime createdAt;
 
-    public Member(String name, LocalDate birth, String phoneNumber, Address address, String profileImage) {
+    public Member(String name, LocalDate birth, String phoneNumber, Address address) {
         this.name = name;
         this.birth = birth;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.profileImage = profileImage;
     }
 
     public void addDonate(Donate donate) {
@@ -80,7 +78,6 @@ public abstract class Member {
         concertMember.setMember(this);
     }
 
-    //TODO: default image url PrePersist 생성
     @PrePersist
     public void PrePersist() {
         this.profileImage = this.profileImage == null ? "www.default.com" : this.profileImage;

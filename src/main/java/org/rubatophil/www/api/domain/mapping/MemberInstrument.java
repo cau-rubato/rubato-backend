@@ -23,6 +23,7 @@ public class MemberInstrument {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
+    @NotNull
     private Member member;
 
     @Enumerated(EnumType.STRING)
@@ -37,7 +38,8 @@ public class MemberInstrument {
     private LocalDateTime createdAt;
 
     @Builder
-    public MemberInstrument(Instrument instrument) {
+    public MemberInstrument(Member member, Instrument instrument) {
+        this.member = member;
         this.instrument = instrument;
     }
 }

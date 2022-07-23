@@ -11,6 +11,7 @@ import org.rubatophil.www.api.domain.member.Member;
 import org.rubatophil.www.api.service.BudgetService;
 import org.rubatophil.www.api.service.DonateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.servlet.HttpEncodingAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
