@@ -20,8 +20,8 @@ public class GuestMember extends Member {
     private List<MemberInstrument> memberInstruments = new ArrayList<>();
 
     @Builder
-    public GuestMember(String name, LocalDate birth, String phoneNumber, Address address) {
-        super(name, birth, phoneNumber, address);
+    public GuestMember(String name, LocalDate birth, String phoneNumber, Address address, String profileImage) {
+        super(name, birth, phoneNumber, address, profileImage);
     }
 
     public void addMemberInstrument(MemberInstrument memberInstrument) {

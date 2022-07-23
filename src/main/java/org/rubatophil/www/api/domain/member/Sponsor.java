@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class Sponsor extends Member {
 
     @Builder
-    public Sponsor(String name, LocalDate birth, String phoneNumber, Address address) {
-        super(name, birth, phoneNumber, address);
+    public Sponsor(String name, LocalDate birth, String phoneNumber, Address address, String profileImage) {
+        super(name, birth, phoneNumber, address, profileImage);
     }
 }

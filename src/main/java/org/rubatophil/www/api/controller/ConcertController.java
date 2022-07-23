@@ -1,6 +1,5 @@
 package org.rubatophil.www.api.controller;
 
-import net.bytebuddy.asm.Advice;
 import org.rubatophil.www.api.response.concert.ConcertDetailResponse;
 import org.rubatophil.www.api.response.concert.ConcertLatestResponse;
 import org.rubatophil.www.api.response.concert.ConcertSummaryResponse;

@@ -1,51 +1,102 @@
 package org.rubatophil.www.api.controller;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.rubatophil.www.api.domain.FAQ;
+import org.rubatophil.www.api.service.FAQService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.servlet.HttpEncodingAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.filter.CharacterEncodingFilter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(FAQController.class)
-@Import(HttpEncodingAutoConfiguration.class)
 class FAQControllerTest {
 
+    @Autowired
     MockMvc mockMvc;
 
-    @Autowired
-    private WebApplicationContext ctx;
+    @MockBean
+    FAQService faqService;
+    List<FAQ> faqs;
+    FAQ faq;
 
     @BeforeEach
     public void setup() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx)
-                .addFilters(new CharacterEncodingFilter("UTF-8", true))  // 필터 추가
-                .alwaysDo(print())
+
+        this.faq = FAQ.builder()
+                .question("test question")
+                .answer("test answer")
                 .build();
     }
 
     @Test
-    public void faqInfo() throws Exception {
+    @DisplayName("getFAQInfo")
+    public void getFAQInfoTest() throws Exception {
+
         //given
-        String url = "/faqs";
-        String expectedJson = "[{\"id\":0,\"question\":\"몇살이에요?\",\"answer\":\"25살\"},{\"id\":1,\"question\":\"어떻게 가입해요?\",\"answer\":\"몰라요\"}]";
+        String url = "/v1/faqs";
+        String expectedJson = "[{\"id\":null,\"question\":\"test question\",\"answer\":\"test answer\"}]";
+
+        this.faqs = new ArrayList<>();
+        this.faqs.add(this.faq);
 
         //when
-        ResultActions mvcResult = mockMvc.perform(get(url));
+        when(this.faqService.getAllFAQs()).thenReturn(this.faqs);
+
+        ResultActions mvcResult = this.mockMvc.perform(get(url));
 
         //then
         mvcResult.andExpect(status().isOk())
                 .andExpect(content().string(expectedJson));
+    }
 
+    @Test
+    @DisplayName("postFAQInfo")
+    public void postFAQInfoTest() throws Exception {
+
+        //given
+        String url = "/v1/faqs";
+        String newFAQ = "{\"question\":\"test question\",\"answer\":\"test answer\"}";
+
+        //when
+        ResultActions mvcResult = this.mockMvc.perform(post(url)
+                .content(newFAQ)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+        );
+
+        //then
+        mvcResult.andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("[postFAQInfo] 하나의 request field가 null")
+    public void postFAQInfoNullTest() throws Exception {
+
+        //given
+        String url = "/v1/faqs";
+        String newFAQ = "{\"answer\":\"test answer\"}";
+
+        //when
+        ResultActions mvcResult = this.mockMvc.perform(post(url)
+                .content(newFAQ)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+        );
+
+        //then
+        mvcResult.andExpect(status().isBadRequest());
     }
 }

@@ -1,33 +1,50 @@
 package org.rubatophil.www.api.controller;
 
+import lombok.RequiredArgsConstructor;
+import org.rubatophil.www.api.domain.FAQ;
+import org.rubatophil.www.api.request.NewFAQ;
 import org.rubatophil.www.api.response.faq.FAQResponse;
+import org.rubatophil.www.api.service.FAQService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class FAQController {
-    @GetMapping("/faqs")
-    public List<FAQResponse> faqInfo() {
+
+    private final FAQService faqService;
+
+    @GetMapping("v1/faqs")
+    public List<FAQResponse> getFAQInfo() {
         List<FAQResponse> faqList = new ArrayList<>();
 
-        FAQResponse faq1 = FAQResponse.builder().
-                id(0L).
-                question("몇살이에요?").
-                answer("25살").
-                build();
+        List<FAQ> serviceResult = faqService.getAllFAQs();
 
-        FAQResponse faq2 = FAQResponse.builder().
-                id(1L).
-                question("어떻게 가입해요?").
-                answer("몰라요").
-                build();
-
-        faqList.add(faq1);
-        faqList.add(faq2);
+        for (FAQ result : serviceResult) {
+            faqList.add(FAQResponse.builder()
+                            .id(result.getId())
+                            .question(result.getQuestion())
+                            .answer(result.getAnswer())
+                            .build()
+            );
+        }
 
         return faqList;
+    }
+
+    @PostMapping("v1/faqs")
+    public void postFAQInfo(@Valid @RequestBody NewFAQ newFAQ) {
+        FAQ faq = FAQ.builder()
+                .question(newFAQ.getQuestion())
+                .answer(newFAQ.getAnswer())
+                .build();
+
+        faqService.addNewFAQ(faq);
     }
 }
